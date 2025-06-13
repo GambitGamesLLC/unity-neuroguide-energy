@@ -24,9 +24,6 @@ public class Main : MonoBehaviour
 
     #region PUBLIC - VARIABLES
 
-    public GameObject Hypercube;
-    public GameObject Pieces_Hypercube;
-
     /// <summary>
     /// Should we enable the NeuroGuideManager debug logs?
     /// </summary>
@@ -56,7 +53,7 @@ public class Main : MonoBehaviour
     /// <summary>
     /// What tween easing should we use?
     /// </summary>
-    public Ease ease = Ease.OutBounce;
+    public Ease ease = Ease.Linear;
 #endif
 
     /// <summary>
@@ -69,10 +66,8 @@ public class Main : MonoBehaviour
     /// </summary>
     public bool randomizeStartValue = true;
 
-    /// <summary>
-    /// The debug threshhold value to reach to be in the 'enabled' state
-    /// </summary>
-    public float threshhold_normalized = 0.5f;
+    //The threshold value we're trying to keep our nodes below
+    public float threshhold = 0.5f;
 
     #endregion
 
@@ -129,41 +124,24 @@ public class Main : MonoBehaviour
                 debugEaseType = ease,
 #endif
                 debugTweenDuration = duration,
-                debugRandomizeStartingValues = randomizeStartValue
+                debugRandomizeStartingValues = randomizeStartValue,
+                debugThreshold = threshhold
             },
-            ( NeuroGuideManager.NeuroGuideSystem system ) => {
-                Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager and recieved system object... system.data.count = " + system.data.Count );
-
-                SetHypercubeState( false );
-
+            ( NeuroGuideManager.NeuroGuideSystem system ) => 
+            {
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager and recieved system object... system.data.count = " + system.data.Count );
             },
             ( string error ) => {
-                Debug.LogWarning( error );
+                if( logs ) Debug.LogWarning( error );
             },
             ( NeuroGuideManager.NeuroGuideSystem system ) =>
             {
-                //Debug.Log( "NeuroGuideDemo CreateNeuroGuideManager() Data Updated" );
-
-                if(system != null && system.data != null && system.data.Count > 0)
-                {
-                    Debug.Log( system.data[ 0 ].currentNormalizedValue );
-
-                    //Get the overall value of the NeuroGuide, we'll use that instead of the individual nodes
-                    if(system.data[ 0 ].currentNormalizedValue >= threshhold_normalized)
-                    {
-                        SetHypercubeState( true );
-                    }
-                    else
-                    {
-                        SetHypercubeState( false );
-                    }
-                }
-
+                //if( logs ) Debug.Log( "NeuroGuideDemo CreateNeuroGuideManager() Data Updated" );
             },
-        ( NeuroGuideManager.NeuroGuideSystem system, NeuroGuideManager.State state ) =>
-        {
-            Debug.Log( "Main.cs CreateNeuroGuideManager() State changed to " + state.ToString() );
-        } );
+            ( NeuroGuideManager.NeuroGuideSystem system, NeuroGuideManager.State state ) =>
+            {
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() State changed to " + state.ToString() );
+            } );;
 
     } //END CreateNeuroGuideManager Method
 
@@ -210,31 +188,6 @@ public class Main : MonoBehaviour
         }
 
     } //END DestroyCubes
-
-    #endregion
-
-    #region SET HYPERCUBE STATE
-
-    /// <summary>
-    /// Sets the state of the hypercube as on or off. While off we show the smaller cube pieces
-    /// </summary>
-    /// <param name="enabled"></param>
-    //-----------------------------------------------------//
-    public void SetHypercubeState( bool enabled )
-    //-----------------------------------------------------//
-    {
-        if(enabled)
-        {
-            Hypercube.SetActive( true );
-            Pieces_Hypercube.SetActive( false );
-        }
-        else
-        {
-            Hypercube.SetActive( false );
-            Pieces_Hypercube.SetActive( true );
-        }
-
-    } //END SetHypercubeState Method
 
     #endregion
 
