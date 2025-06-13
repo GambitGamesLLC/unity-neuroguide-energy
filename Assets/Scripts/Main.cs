@@ -24,7 +24,8 @@ public class Main : MonoBehaviour
 
     #region PUBLIC - VARIABLES
 
-    private GameObject cubeParent;
+    public GameObject Hypercube;
+    public GameObject Pieces_Hypercube;
 
     /// <summary>
     /// Should we enable the NeuroGuideManager debug logs?
@@ -68,6 +69,11 @@ public class Main : MonoBehaviour
     /// </summary>
     public bool randomizeStartValue = true;
 
+    /// <summary>
+    /// The debug threshhold value to reach to be in the 'enabled' state
+    /// </summary>
+    public float threshhold_normalized = 0.5f;
+
     #endregion
 
     #region PUBLIC - START
@@ -79,7 +85,7 @@ public class Main : MonoBehaviour
     public void Start()
     //----------------------------------//
     {
-        cubeParent = gameObject;
+        CreateNeuroGuideManager();
 
     } //END Start Method
 
@@ -95,35 +101,13 @@ public class Main : MonoBehaviour
     //----------------------------------//
     {
 
-        CreateOnEnterKey();
         DestroyOnDeleteKey();
 
     } //END Update Method
 
     #endregion
 
-    #region PRIVATE - CREATE ON ENTER KEY PRESSED
-
-    /// <summary>
-    /// Creates the NeuroGuideManager instance when the enter key is pressed
-    /// </summary>
-    //-----------------------------------------------//
-    private void CreateOnEnterKey()
-    //-----------------------------------------------//
-    {
-#if UNITY_INPUT
-        if(Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            CreateNeuroGuideManager();
-        }
-#else
-        if(Input.GetKeyUp( KeyCode.KeypadEnter ))
-        {
-            CreateNeuroGuideManager();
-        }
-#endif
-
-    } //END CreateOnEnterKey Method
+    #region PRIVATE - CREATE ON START
 
     /// <summary>
     /// Creates the NeuroGuideManager
@@ -150,14 +134,7 @@ public class Main : MonoBehaviour
             ( NeuroGuideManager.NeuroGuideSystem system ) => {
                 Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager and recieved system object... system.data.count = " + system.data.Count );
 
-                //Spawn cubes to match the system data
-                for(int i = 0; i < system.data.Count; i++)
-                {
-                    GameObject go = GameObject.CreatePrimitive( PrimitiveType.Cube );
-                    go.name = "Cube: " + system.data[ i ].name;
-                    go.transform.parent = cubeParent.transform;
-                    go.transform.localPosition = new Vector3( system.data[ i ].currentValue, 0, 0 );
-                }
+                SetHypercubeState( false );
 
             },
             ( string error ) => {
@@ -169,14 +146,16 @@ public class Main : MonoBehaviour
 
                 if(system != null && system.data != null && system.data.Count > 0)
                 {
-                    for(int i = 0; i < system.data.Count; i++)
-                    {
-                        GameObject go = GameObject.Find( "Cube: " + system.data[ i ].name );
+                    Debug.Log( system.data[ 0 ].currentNormalizedValue );
 
-                        if(go != null)
-                        {
-                            go.transform.localPosition = new Vector3( system.data[ i ].currentValue, 0, 0 );
-                        }
+                    //Get the overall value of the NeuroGuide, we'll use that instead of the individual nodes
+                    if(system.data[ 0 ].currentNormalizedValue >= threshhold_normalized)
+                    {
+                        SetHypercubeState( true );
+                    }
+                    else
+                    {
+                        SetHypercubeState( false );
                     }
                 }
 
@@ -231,6 +210,31 @@ public class Main : MonoBehaviour
         }
 
     } //END DestroyCubes
+
+    #endregion
+
+    #region SET HYPERCUBE STATE
+
+    /// <summary>
+    /// Sets the state of the hypercube as on or off. While off we show the smaller cube pieces
+    /// </summary>
+    /// <param name="enabled"></param>
+    //-----------------------------------------------------//
+    public void SetHypercubeState( bool enabled )
+    //-----------------------------------------------------//
+    {
+        if(enabled)
+        {
+            Hypercube.SetActive( true );
+            Pieces_Hypercube.SetActive( false );
+        }
+        else
+        {
+            Hypercube.SetActive( false );
+            Pieces_Hypercube.SetActive( true );
+        }
+
+    } //END SetHypercubeState Method
 
     #endregion
 
