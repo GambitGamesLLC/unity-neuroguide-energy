@@ -126,7 +126,7 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     public void PlayAnimationDirectly( string stateName, int layer = 0, float normalizedTime = 0f )
     //-----------------------------------------------------------------//
     {
-        if(animator != null)
+        if(animator != null && animator.gameObject.activeSelf)
         {
             animator.Play( stateName, 0, normalizedTime );
         }
