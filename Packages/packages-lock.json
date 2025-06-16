@@ -7,19 +7,26 @@
       "dependencies": {},
       "hash": "7fcd6b1e76ae6ab331438705fb4a4a71f2fa4e23"
     },
+    "com.gambit.mathhelper": {
+      "version": "https://github.com/GambitGamesLLC/unity-math-helper.git?path=Assets/Plugins/Package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "871d15454b539bf84323ce65260018d76086c509"
+    },
     "com.gambit.neuroguide": {
       "version": "https://github.com/GambitGamesLLC/unity-neuroguide-manager.git?path=Assets/Plugins/Package",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "5232606093856cb396d4fca9023e6f93c3591120"
+      "hash": "79322ce55cefc74fda864971fd4912eaae4aba39"
     },
     "com.gambit.singleton": {
       "version": "https://github.com/GambitGamesLLC/unity-singleton.git?path=Assets/Plugins/Package",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "9e46011d75335eaaf8b58fdbbcc76c367ab15b36"
+      "hash": "ad33daf5f686db31350d9df7a8eb103f6ba907e3"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.7",

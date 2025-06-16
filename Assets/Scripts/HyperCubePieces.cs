@@ -63,9 +63,18 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
     //------------------------------------------------------------------------//
     {
-        Debug.Log( system.currentNormalizedAverageValue );
+        //Debug.Log( system.currentNormalizedAverageValue );
         PlayAnimationDirectly( "Joining", 0, system.currentNormalizedAverageValue );
-        animator.speed = 0f;
+
+        //If we reach our max value, hide the cube pieces and only show the hypercube
+        if(system.currentNormalizedAverageValue > .95f)
+        {
+            cube_pieces.SetActive( false );
+        }
+        else
+        {
+            cube_pieces.SetActive( true );
+        }
 
     } //END OnDataUpdate Method
 
