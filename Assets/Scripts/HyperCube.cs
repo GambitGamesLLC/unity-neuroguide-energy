@@ -51,7 +51,7 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
     //------------------------------------------------------------------------//
     {
-        if(system.averageValueBelowThreshold)
+        if(system.currentNormalizedAverageValue > .95f )
         {
             hypercube.SetActive( true );
         }

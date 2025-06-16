@@ -21,7 +21,15 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
 
     #region PUBLIC - VARIABLES
 
+    /// <summary>
+    /// GameObject for the cube pieces
+    /// </summary>
     public GameObject cube_pieces;
+
+    /// <summary>
+    /// Animator for the cube pieces
+    /// </summary>
+    public Animator animator;
 
     #endregion
 
@@ -37,6 +45,10 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
 
         cube_pieces.SetActive( true );
 
+        //We need to start at the split animation until we start reading data from the NeuroGuide hardware
+        PlayAnimationDirectly( "Split" );
+        animator.speed = 0f;
+        
     } //END Start
 
     #endregion
@@ -51,14 +63,9 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
     //------------------------------------------------------------------------//
     {
-        if(system.averageValueBelowThreshold)
-        {
-            cube_pieces.SetActive( false );
-        }
-        else
-        {
-            cube_pieces.SetActive( true );
-        }
+        Debug.Log( system.currentNormalizedAverageValue );
+        PlayAnimationDirectly( "Joining", 0, system.currentNormalizedAverageValue );
+        animator.speed = 0f;
 
     } //END OnDataUpdate Method
 
@@ -76,6 +83,46 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     {
 
     } //END OnStateUpdate
+
+    // Call this method to play a specific animation based on a trigger
+
+    #endregion
+
+    #region PUBLIC - PLAY ANIMATION TRIGGER
+
+    /// <summary>
+    /// Switches to an animation clip based on the trigger name
+    /// </summary>
+    /// <param name="triggerName"></param>
+    //----------------------------------------------------------//
+    public void PlayAnimationTrigger( string triggerName )
+    //----------------------------------------------------------//
+    {
+        if(animator != null)
+        {
+            animator.SetTrigger( triggerName );
+        }
+
+    } //END PlayAnimationTrigger
+
+    #endregion
+
+    #region PUBLIC - PLAY ANIMATION DIRECTLY
+
+    /// <summary>
+    /// Call this method to directly play an animation state
+    /// </summary>
+    /// <param name="stateName"></param>
+    //-----------------------------------------------------------------//
+    public void PlayAnimationDirectly( string stateName, int layer = 0, float normalizedTime = 0f )
+    //-----------------------------------------------------------------//
+    {
+        if(animator != null)
+        {
+            animator.Play( stateName, 0, normalizedTime );
+        }
+
+    } //END PlayAnimationDirectly
 
     #endregion
 
