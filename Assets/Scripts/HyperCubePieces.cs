@@ -12,6 +12,10 @@
 using gambit.neuroguide;
 #endif
 
+#if GAMBIT_MATHHELPER
+using gambit.mathhelper;
+#endif
+
 using UnityEngine;
 
 #endregion
@@ -30,6 +34,11 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     /// Animator for the cube pieces
     /// </summary>
     public Animator animator;
+
+    /// <summary>
+    /// The material with the grunge texture 
+    /// </summary>
+    public Material grunge_material;
 
     #endregion
 
@@ -63,6 +72,11 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
     //------------------------------------------------------------------------//
     {
+        if(system == null || (system != null && system.data == null) || (system != null && system.data.Count == 0))
+        {
+            return;
+        }
+
         //Debug.Log( system.currentNormalizedAverageValue );
         PlayAnimationDirectly( "Joining", 0, system.currentNormalizedAverageValue );
 
@@ -75,6 +89,11 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
         {
             cube_pieces.SetActive( true );
         }
+
+        //Animate our cube grunge texture
+#if GAMBIT_MATHHELPER
+        grunge_material.SetFloat( "_AlphaClipping", MathHelper.Map( system.currentNormalizedAverageValue, 0f, 1f, 0.1f, 1.1f ) );
+#endif
 
     } //END OnDataUpdate Method
 

@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cube_pieces: {fileID: 407440122}
   animator: {fileID: 407440125}
+  grunge_material: {fileID: 2100000, guid: dfa694647c2a38e4ab962e48539e8670, type: 2}
 --- !u!95 &407440125 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1224394882056558822, guid: f7c84f7091eeda741812992fcb4906c5, type: 3}
