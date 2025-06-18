@@ -4,10 +4,6 @@
 using gambit.neuroguide;
 #endif
 
-#if GAMBIT_MATHHELPER
-using gambit.mathhelper;
-#endif
-
 #if EXT_DOTWEEN
 using DG.Tweening;
 #endif
@@ -45,7 +41,9 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
     /// <summary>
     /// Call this method to capture the current rotation as the new starting point for the cycle.
     /// </summary>
+    //---------------------------//
     public void Start()
+    //---------------------------//
     {
         if(hypercubeParent == null)
         {
@@ -57,7 +55,8 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
         _initialXRotation = initialEulerAngles.x;
         _initialYRotation = initialEulerAngles.y;
         _initialZRotation = initialEulerAngles.z;
-    }
+
+    } //END Start Method
 
     #endregion
 
