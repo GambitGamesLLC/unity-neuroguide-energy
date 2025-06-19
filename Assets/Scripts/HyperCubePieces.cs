@@ -40,6 +40,11 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     public Material grunge_material;
 
+    /// <summary>
+    /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
+    /// </summary>
+    public float threshold = 0.85f;
+
     #endregion
 
     #region PUBLIC START
@@ -69,19 +74,15 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     /// <param name="system">The NeuroGuide system object</param>
     //------------------------------------------------------------------------//
-    public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
+    public void OnDataUpdate( float value )
     //------------------------------------------------------------------------//
     {
-        if(system == null || (system != null && system.data == null) || (system != null && system.data.Count == 0))
-        {
-            return;
-        }
 
         //Debug.Log( system.currentNormalizedAverageValue );
-        PlayAnimationDirectly( "Joining", 0, system.currentNormalizedAverageValue );
+        PlayAnimationDirectly( "Joining", 0, value );
 
         //If we reach our max value, hide the cube pieces and only show the hypercube
-        if(system.currentNormalizedAverageValue > .95f)
+        if( value >= threshold)
         {
             cube_pieces.SetActive( false );
         }
@@ -92,27 +93,10 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
 
         //Animate our cube grunge texture
 #if GAMBIT_MATHHELPER
-        grunge_material.SetFloat( "_AlphaClipping", MathHelper.Map( system.currentNormalizedAverageValue, 0f, 1f, 0.1f, 1.1f ) );
+        grunge_material.SetFloat( "_AlphaClipping", MathHelper.Map( value, 0f, 1f, 0.1f, 1.1f ) );
 #endif
 
     } //END OnDataUpdate Method
-
-    #endregion
-
-    #region PUBLIC - NEUROGUIDE - ON STATE UPDATE
-
-    /// <summary>
-    /// When the state of the NeuroGuide updates
-    /// </summary>
-    /// <param name="system">The NeuroGuide system object</param>
-    //------------------------------------------------------------------------------//
-    public void OnStateUpdate( NeuroGuideManager.NeuroGuideSystem system )
-    //------------------------------------------------------------------------------//
-    {
-
-    } //END OnStateUpdate
-
-    // Call this method to play a specific animation based on a trigger
 
     #endregion
 

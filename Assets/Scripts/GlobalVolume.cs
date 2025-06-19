@@ -89,36 +89,16 @@ public class GlobalVolume : MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     /// <param name="system"></param>
     //----------------------------------------------------------------------//
-    public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
+    public void OnDataUpdate( float value )
     //----------------------------------------------------------------------//
     {
 
-        if(system == null || (system.data != null && system.data.Count == 0))
-        {
-            return;
-        }
-
 #if GAMBIT_MATHHELPER
-        bloomSettings.threshold.value = MathHelper.Map( system.currentNormalizedAverageValue, 0f, 1f, bloom_min, bloom_max );
+        bloomSettings.threshold.value = MathHelper.Map( value, 0f, 1f, bloom_min, bloom_max );
 #endif
 
     } //END OnDataUpdate Method
 
 #endregion
-
-    #region PUBLIC - ON STATE UPDATE
-
-    /// <summary>
-    /// NeuroGuide hardware state has updated
-    /// </summary>
-    /// <param name="system"></param>
-    //--------------------------------------------------------------------------//
-    public void OnStateUpdate( NeuroGuideManager.NeuroGuideSystem system )
-    //--------------------------------------------------------------------------//
-    {
-
-    } //END OnStateUpdate Method
-
-    #endregion
 
 } //END GlobalVolume.cs Class
