@@ -67,7 +67,7 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     /// <param name="system"></param>
     //-----------------------------------------------------------------------//
-    public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
+    public void OnDataUpdate( float value )
     //-----------------------------------------------------------------------//
     {
 
@@ -77,7 +77,7 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
         // Calculate the target rotation by adding to the initial Y rotation.
         // A value of 0 results in the initial rotation.
         // A value of 1 results in the initial rotation + 360 degrees.
-        float targetYRotation = _initialYRotation + ( system.currentNormalizedAverageValue * 360f );
+        float targetYRotation = _initialYRotation + (value * 360f );
 
         // Get the current local rotation of the transform
         Vector3 currentRotation = hypercubeParent.transform.localEulerAngles;
@@ -93,21 +93,6 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
 #endif
 
     } //END OnDataUpdate Method
-
-    #endregion
-
-    #region PUBLIC - ON STATE UPDATE
-
-    /// <summary>
-    /// State update event for NeuroGuide hardware
-    /// </summary>
-    /// <param name="system"></param>
-    //---------------------------------------------------------------------------//
-    public void OnStateUpdate( NeuroGuideManager.NeuroGuideSystem system )
-    //---------------------------------------------------------------------------//
-    {
-        
-    } //END OnStateUpdate Method
 
     #endregion
 

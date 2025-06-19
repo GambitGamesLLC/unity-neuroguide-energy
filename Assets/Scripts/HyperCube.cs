@@ -2,10 +2,6 @@
     //Class is unused if gambit.neuroguide package is missing
 #else
 
-/// <summary>
-/// Keeps the Hypercube visual component up to date with the NeuroGuide hardware data
-/// </summary>
-
 #region IMPORTS
 
 #if GAMBIT_NEUROGUIDE
@@ -16,12 +12,20 @@ using UnityEngine;
 
 #endregion
 
+/// <summary>
+/// Keeps the Hypercube visual component up to date with the NeuroGuide hardware data
+/// </summary>
 public class HyperCube : MonoBehaviour, INeuroGuideInteractable
 {
 
     #region PUBLIC - VARIABLES
 
     public GameObject hypercube;
+
+    /// <summary>
+    /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
+    /// </summary>
+    public float threshold = 0.85f;
 
     #endregion
 
@@ -48,10 +52,10 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     /// <param name="system">The NeuroGuide system object</param>
     //------------------------------------------------------------------------//
-    public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
+    public void OnDataUpdate( float value )
     //------------------------------------------------------------------------//
     {
-        if(system.currentNormalizedAverageValue > .95f )
+        if( value >= threshold )
         {
             hypercube.SetActive( true );
         }
@@ -61,21 +65,6 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
         }
         
     } //END OnDataUpdate Method
-
-    #endregion
-
-    #region PUBLIC - NEUROGUIDE - ON STATE UPDATE
-
-    /// <summary>
-    /// When the state of the NeuroGuide updates
-    /// </summary>
-    /// <param name="system">The NeuroGuide system object</param>
-    //------------------------------------------------------------------------------//
-    public void OnStateUpdate( NeuroGuideManager.NeuroGuideSystem system )
-    //------------------------------------------------------------------------------//
-    {
-        
-    } //END OnStateUpdate
 
     #endregion
 

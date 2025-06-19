@@ -23,6 +23,11 @@ public class BGCubes: MonoBehaviour, INeuroGuideInteractable
     private string shake_anim = "BG_Cubes_Shake_Loop";
     private string float_anim = "BG_Cubes_Float_Start";
 
+    /// <summary>
+    /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
+    /// </summary>
+    public float threshold = 0.85f;
+
     #endregion
 
     #region PRIVATE - VARIABLES
@@ -58,16 +63,11 @@ public class BGCubes: MonoBehaviour, INeuroGuideInteractable
     /// </summary>
     /// <param name="system"></param>
     //----------------------------------------------------------------------//
-    public void OnDataUpdate( NeuroGuideManager.NeuroGuideSystem system )
+    public void OnDataUpdate( float value )
     //----------------------------------------------------------------------//
     {
 
-        if(system == null || (system.data != null && system.data.Count == 0))
-        {
-            return;
-        }
-
-        if(system.isAverageValueBelowThreshold)
+        if(value >= threshold )
         {
             PlayAnimationDirectly( float_anim, 0, 0f );
             animator.speed = 1f;
@@ -79,21 +79,6 @@ public class BGCubes: MonoBehaviour, INeuroGuideInteractable
         }
 
     } //END OnDataUpdate Method
-
-    #endregion
-
-    #region PUBLIC - ON STATE UPDATE
-
-    /// <summary>
-    /// NeuroGuide hardware state has updated
-    /// </summary>
-    /// <param name="system"></param>
-    //--------------------------------------------------------------------------//
-    public void OnStateUpdate( NeuroGuideManager.NeuroGuideSystem system )
-    //--------------------------------------------------------------------------//
-    {
-
-    } //END OnStateUpdate Method
 
     #endregion
 

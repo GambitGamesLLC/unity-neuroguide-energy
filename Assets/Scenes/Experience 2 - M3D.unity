@@ -719,7 +719,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: logs
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: experienceLengthInSeconds
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -990,6 +994,7 @@ MonoBehaviour:
   cube_pieces: {fileID: 603471133}
   animator: {fileID: 603471134}
   grunge_material: {fileID: 2100000, guid: dfa694647c2a38e4ab962e48539e8670, type: 2}
+  threshold: 0.85
 --- !u!1 &713146143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1851828388114785270, guid: 416441a3749db9649b8a0f53e3ce92ba, type: 3}
@@ -1013,6 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 713146145}
+  threshold: 0.85
 --- !u!1 &773743951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,6 +2485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hypercube: {fileID: 1981093132}
+  threshold: 0.85
 --- !u!1001 &2032188598
 PrefabInstance:
   m_ObjectHideFlags: 0

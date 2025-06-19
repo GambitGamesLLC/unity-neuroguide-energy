@@ -35,39 +35,9 @@ public class Main : MonoBehaviour
     public bool debug = true;
 
     /// <summary>
-    /// How many cubes should we spawn? Each cube will be tied to a NeuroGuideData object
+    /// How long should this experience last if the user was in a reward state continuously?
     /// </summary>
-    public int entries = 1;
-
-    /// <summary>
-    /// What is the min value we should use for the local position possible to reach by the cube movement?
-    /// </summary>
-    public int min = -5;
-
-    /// <summary>
-    /// What is the max value we should use for the local position possible to reach by the cube movement?
-    /// </summary>
-    public int max = 5;
-
-#if EXT_DOTWEEN
-    /// <summary>
-    /// What tween easing should we use?
-    /// </summary>
-    public Ease ease = Ease.Linear;
-#endif
-
-    /// <summary>
-    /// How long should our tweens take?
-    /// </summary>
-    public int duration = 2;
-
-    /// <summary>
-    /// Should the starting value of our NeuroGuideData be randomized?
-    /// </summary>
-    public bool randomizeStartValue = true;
-
-    //The threshold value we're trying to keep our nodes below
-    public float threshhold = 0.5f;
+    public float experienceLengthInSeconds = 5f;
 
     #endregion
 
@@ -86,22 +56,6 @@ public class Main : MonoBehaviour
 
     #endregion
 
-    #region PUBLIC - UPDATE
-
-    /// <summary>
-    /// Unity lifecycle method
-    /// </summary>
-    //----------------------------------//
-    public void Update()
-    //----------------------------------//
-    {
-
-        DestroyOnDeleteKey();
-
-    } //END Update Method
-
-    #endregion
-
     #region PRIVATE - CREATE ON START
 
     /// <summary>
@@ -112,82 +66,83 @@ public class Main : MonoBehaviour
     //---------------------------------------------//
     {
 
-        NeuroGuideManager.Create(
+        NeuroGuideManager.Create
+        (
+            //Options
             new NeuroGuideManager.Options()
             {
                 showDebugLogs = logs,
-                enableDebugData = debug,
-                debugNumberOfEntries = entries,
-                debugMinCurrentValue = min,
-                debugMaxCurrentValue = max,
-#if EXT_DOTWEEN
-                debugEaseType = ease,
-#endif
-                debugTweenDuration = duration,
-                debugRandomizeStartingValues = randomizeStartValue,
-                debugThreshold = threshhold
+                enableDebugData = debug
             },
+
+            //OnSuccess
             ( NeuroGuideManager.NeuroGuideSystem system ) => 
             {
-                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager and recieved system object... system.data.count = " + system.data.Count );
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager" );
+                CreateNeuroGuideExperience();
             },
+
+            //OnError
             ( string error ) => {
                 if( logs ) Debug.LogWarning( error );
             },
-            ( NeuroGuideManager.NeuroGuideSystem system ) =>
+
+            //OnDataUpdate
+            ( NeuroGuideData data ) =>
             {
                 //if( logs ) Debug.Log( "NeuroGuideDemo CreateNeuroGuideManager() Data Updated" );
             },
-            ( NeuroGuideManager.NeuroGuideSystem system, NeuroGuideManager.State state ) =>
+
+            //OnStateUpdate
+            ( NeuroGuideManager.State state ) =>
             {
                 if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() State changed to " + state.ToString() );
-            } );;
+            } );
 
     } //END CreateNeuroGuideManager Method
 
     #endregion
 
-    #region PRIVATE - DESTROY ON DELETE KEY PRESSED
+    #region PRIVATE - CREATE NEUROGUIDE EXPERIENCE
 
     /// <summary>
-    /// Destroy the NeuroGuideManager instance
+    /// Initializes a NeuroGuideExperience once the hardware is ready
     /// </summary>
-    //--------------------------------------------//
-    private void DestroyOnDeleteKey()
-    //--------------------------------------------//
+    //---------------------------------------------//
+    private void CreateNeuroGuideExperience()
+    //---------------------------------------------//
     {
 
-#if UNITY_INPUT
-        if(Keyboard.current.deleteKey.wasPressedThisFrame)
-        {
-            DestroyCubes();
-            NeuroGuideManager.Destroy();
-        }
-#else
-        if(Input.GetKeyUp( KeyCode.Delete ))
-        {
-            DestroyCubes();
-            NeuroGuideManager.Destroy();
-        }
-#endif
-
-    } //END DestroyOnDelete
-
-    //-------------------------------//
-    private void DestroyCubes()
-    //-------------------------------//
-    {
-
-        if(NeuroGuideManager.system != null && NeuroGuideManager.system.data.Count > 0)
-        {
-            for(int i = 0; i < NeuroGuideManager.system.data.Count; i++)
+        NeuroGuideExperience.Create
+        (
+            //Options
+            new NeuroGuideExperience.Options()
             {
-                GameObject go = GameObject.Find( "Cube: " + NeuroGuideManager.system.data[ i ].name );
-                Destroy( go );
-            }
-        }
+                showDebugLogs = logs,
+                totalDurationInSeconds = experienceLengthInSeconds
+            },
 
-    } //END DestroyCubes
+            //OnSuccess
+            (NeuroGuideExperience.NeuroGuideExperienceSystem system)=>
+            {
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Successfully created NeuroGuideExperience" );
+            },
+
+            //OnFailed
+            (string error)=>
+            {
+                if( logs ) Debug.Log( error );
+            },
+
+            //OnDataUpdate
+            (float value)=>
+            {
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Data Updated = " + value );
+            }
+
+        );
+
+    } //END CreateNeuroGuideExperience Method
 
     #endregion
 
