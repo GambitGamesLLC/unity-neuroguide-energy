@@ -19,7 +19,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "eeb67fcc54c2209a599deb35fa6dd6aa892fc1f0"
+      "hash": "ac3c4afce7aa54119dc97cd66d4909e3223edb22"
     },
     "com.gambit.singleton": {
       "version": "https://github.com/GambitGamesLLC/unity-singleton.git?path=Assets/Plugins/Package",
