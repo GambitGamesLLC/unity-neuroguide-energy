@@ -803,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: experienceLengthInSeconds
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6643,6 +6643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1512263374}
   - component: {fileID: 1512263373}
+  - component: {fileID: 1512263375}
   m_Layer: 0
   m_Name: FullscreenTransitionFlash
   m_TagString: Untagged
@@ -6702,6 +6703,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512263375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512263372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c07d6eaf6e80c43bc190ed0f0af679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flash_material: {fileID: 2100000, guid: a21b667d1fee6e540a4c748971975a78, type: 2}
+  threshold: 0.85
 --- !u!1 &1612925294
 GameObject:
   m_ObjectHideFlags: 0

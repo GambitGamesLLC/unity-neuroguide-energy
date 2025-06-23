@@ -39,7 +39,7 @@ Material:
     m_Floats:
     - _LerpA: -0.72
     - _LerpB: -1.76
-    - _Opacity: 0
+    - _Opacity: 0.030416653
     m_Colors:
     - _Color: {r: 0.6698113, g: 1, b: 0.8082862, a: 1}
   m_BuildTextureStacks: []

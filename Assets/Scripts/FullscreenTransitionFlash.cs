@@ -1,0 +1,82 @@
+#region IMPORTS
+
+using UnityEngine;
+using DG.Tweening;
+
+
+#if GAMBIT_NEUROGUIDE
+using gambit.neuroguide;
+#endif
+
+#if GAMBIT_MATHHELPER
+using gambit.mathhelper;
+#endif
+
+#endregion
+
+
+/// <summary>
+/// Controls the transition flash material, which shows up when transition the cube to its complete state
+/// </summary>
+public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
+{
+    #region PUBLIC - VARIABLES
+
+    public Material flash_material;
+
+    /// <summary>
+    /// Normalized 0-1 value, how far into the experience should the user be before the flash_material begins showing?
+    /// </summary>
+    public float threshold = .85f;
+
+    #endregion
+
+    #region PUBLIC - START
+
+    /// <summary>
+    /// Unity lifecycle method
+    /// </summary>
+    //-----------------------------//
+    public void Start()
+    //-----------------------------//
+    {
+
+        if(flash_material != null)
+        {
+            flash_material.SetFloat( "_Opacity", 0f );
+        }
+
+    } //END Start
+
+    #endregion
+
+    #region PUBLIC - ON DATA UPDATE
+
+    /// <summary>
+    /// Updates the fullscreen transition flash based on our progress in the Neuroguide experience
+    /// </summary>
+    /// <param name="normalizedValue"></param>
+    //------------------------------------------------------//
+    public void OnDataUpdate( float normalizedValue )
+    //------------------------------------------------------//
+    {
+        
+        if( flash_material != null )
+        {
+            if(normalizedValue > threshold && normalizedValue != 1f)
+            {
+#if EXT_DOTWEEN
+                flash_material.DOFloat( MathHelper.Map( normalizedValue, threshold, 1f, 0f, 1f ), "_Opacity", .1f );
+#endif
+            }
+            else if(normalizedValue == 1f)
+            {
+                flash_material.DOFloat( 0f, "_Opacity", .50f );
+            }
+        }
+
+    } //END OnDataUpdate Method
+
+    #endregion
+
+} //END FullscreenTransitionFlash Class
