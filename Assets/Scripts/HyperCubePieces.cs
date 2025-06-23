@@ -10,6 +10,8 @@
 
 #if GAMBIT_NEUROGUIDE
 using gambit.neuroguide;
+using static UnityEngine.Rendering.DebugUI;
+
 #endif
 
 #if GAMBIT_MATHHELPER
@@ -41,6 +43,31 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     public Material grunge_material;
 
     /// <summary>
+    /// The minimim value for the grunge texture
+    /// </summary>
+    public float grungeMin = 0.1f;
+
+    /// <summary>
+    /// THe maximum value for the grunge texture
+    /// </summary>
+    public float grungeMax = 1.1f;
+
+    /// <summary>
+    /// The material with the transition glow texture 
+    /// </summary>
+    public Material transition_material;
+
+    /// <summary>
+    /// The minimim value for the transition material
+    /// </summary>
+    public float transitionMin = 0f;
+
+    /// <summary>
+    /// THe maximum value for the transition material
+    /// </summary>
+    public float transitionMax = 20f;
+
+    /// <summary>
     /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
     /// </summary>
     public float threshold = 0.85f;
@@ -62,6 +89,16 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
         //We need to start at the split animation until we start reading data from the NeuroGuide hardware
         PlayAnimationDirectly( "Split" );
         animator.speed = 0f;
+
+        if(grunge_material != null)
+        {
+            grunge_material.SetFloat( "_AlphaClipping", grungeMin );
+        }
+
+        if(transition_material != null)
+        {
+            transition_material.SetFloat( "_TransitionAmount", transitionMin );
+        }
         
     } //END Start
 
@@ -93,7 +130,14 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
 
         //Animate our cube grunge texture
 #if GAMBIT_MATHHELPER
-        grunge_material.SetFloat( "_AlphaClipping", MathHelper.Map( value, 0f, 1f, 0.1f, 1.1f ) );
+        if(grunge_material != null ) 
+            grunge_material.SetFloat( "_AlphaClipping", MathHelper.Map( value, 0f, threshold, grungeMin, grungeMax ) );
+#endif
+
+        //Animate our cube transition material
+#if GAMBIT_MATHHELPER
+        if(transition_material != null )
+            transition_material.SetFloat( "_TransitionAmount", MathHelper.Map( value, 0f, threshold, transitionMin, transitionMax ) );
 #endif
 
     } //END OnDataUpdate Method
