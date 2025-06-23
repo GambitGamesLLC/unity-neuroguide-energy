@@ -87,7 +87,7 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
         cube_pieces.SetActive( true );
 
         //We need to start at the split animation until we start reading data from the NeuroGuide hardware
-        PlayAnimationDirectly( "Split" );
+        PlayAnimationDirectly( "Joining" );
         animator.speed = 0f;
 
         if(grunge_material != null)

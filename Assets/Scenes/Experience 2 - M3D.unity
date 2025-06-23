@@ -6039,7 +6039,7 @@ MonoBehaviour:
   grungeMax: 1.1
   transition_material: {fileID: 2100000, guid: 5dbd28afec978dc42b23fc9601de21f3, type: 2}
   transitionMin: 0
-  transitionMax: 5
+  transitionMax: 0.5
   threshold: 0.85
 --- !u!1 &713146143 stripped
 GameObject:
