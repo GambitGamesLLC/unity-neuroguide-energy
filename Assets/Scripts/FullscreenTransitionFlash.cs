@@ -25,9 +25,24 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
     public Material flash_material;
 
     /// <summary>
+    /// Normalized 0-1 value, what is the maximum value of flash intensity?
+    /// </summary>
+    public float flash_intensity;
+
+    /// <summary>
     /// Normalized 0-1 value, how far into the experience should the user be before the flash_material begins showing?
     /// </summary>
-    public float threshold = .85f;
+    public float threshold = .98f;
+
+    /// <summary>
+    /// What normalized experience progress value should we reach before we hide the flash?
+    /// </summary>
+    public float thresholdHideFlash = 1.0f;
+
+    /// <summary>
+    /// How long should it take to hide the flash after we are told to stop it (by reaching the end of the experience)
+    /// </summary>
+    public float flashHide_Length = 0.50f;
 
     #endregion
 
@@ -66,12 +81,12 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
             if(normalizedValue > threshold && normalizedValue != 1f)
             {
 #if EXT_DOTWEEN
-                flash_material.DOFloat( MathHelper.Map( normalizedValue, threshold, 1f, 0f, 1f ), "_Opacity", .1f );
+                flash_material.DOFloat( MathHelper.Map( normalizedValue, threshold, 1f, 0f, flash_intensity ), "_Opacity", .1f );
 #endif
             }
-            else if(normalizedValue == 1f)
+            else if(normalizedValue == thresholdHideFlash )
             {
-                flash_material.DOFloat( 0f, "_Opacity", .50f );
+                flash_material.DOFloat( 0f, "_Opacity", flashHide_Length );
             }
         }
 

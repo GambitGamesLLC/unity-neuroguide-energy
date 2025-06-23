@@ -803,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: experienceLengthInSeconds
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6716,7 +6716,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flash_material: {fileID: 2100000, guid: a21b667d1fee6e540a4c748971975a78, type: 2}
-  threshold: 0.85
+  flash_intensity: 0.5
+  threshold: 0.98
+  thresholdHideFlash: 1
+  flashHide_Length: 0.5
 --- !u!1 &1612925294
 GameObject:
   m_ObjectHideFlags: 0

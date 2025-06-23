@@ -89,7 +89,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AlphaClipping: 0.6073114
+    - _AlphaClipping: 1.1111112
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
     - _AlphaLerp: 0
