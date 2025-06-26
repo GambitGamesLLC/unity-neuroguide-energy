@@ -910,11 +910,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: logs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: port
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: address
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: configPath
+      value: '%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: experienceLengthInSeconds
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
