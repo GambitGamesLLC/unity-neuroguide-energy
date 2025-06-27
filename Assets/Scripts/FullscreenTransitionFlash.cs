@@ -27,12 +27,12 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
     /// <summary>
     /// Normalized 0-1 value, what is the maximum value of flash intensity?
     /// </summary>
-    public float flash_intensity;
+    public float flash_intensity = 0.9f;
 
     /// <summary>
     /// Normalized 0-1 value, how far into the experience should the user be before the flash_material begins showing?
     /// </summary>
-    public float threshold = .98f;
+    public float threshold = 0.9f;
 
     /// <summary>
     /// What normalized experience progress value should we reach before we hide the flash?
@@ -42,7 +42,21 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
     /// <summary>
     /// How long should it take to hide the flash after we are told to stop it (by reaching the end of the experience)
     /// </summary>
-    public float flashHide_Length = 0.50f;
+    public float flashHide_Length = 1.50f;
+
+    /// <summary>
+    /// Normalized 0-1 value, after the flash is shown, how far back does the experience value have to lower before we allow the flash to show again?
+    /// </summary>
+    public float thresholdPreventRepeatedFlashUntilLowerThan = 0.9f;
+
+    #endregion
+
+    #region PRIVATE - VARIABLES
+
+    /// <summary>
+    /// Set to true when the flash has been shown, we use this to prevent the flash from showing when our experience progress dips below our threshold, to prevent the flash from showing up again
+    /// </summary>
+    private bool preventFlash = false;
 
     #endregion
 
@@ -80,13 +94,27 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
         {
             if(normalizedValue > threshold && normalizedValue != 1f)
             {
+                //If we haven't shown the flash yet
+                if(preventFlash == false)
+                {
 #if EXT_DOTWEEN
-                flash_material.DOFloat( MathHelper.Map( normalizedValue, threshold, 1f, 0f, flash_intensity ), "_Opacity", .1f );
+                    flash_material.DOFloat( MathHelper.Map( normalizedValue, threshold, 1f, 0f, flash_intensity ), "_Opacity", .1f );
 #endif
+                }
+
             }
             else if(normalizedValue == thresholdHideFlash )
             {
+                preventFlash = true;
                 flash_material.DOFloat( 0f, "_Opacity", flashHide_Length );
+            }
+
+            if(preventFlash == true)
+            {
+                if(normalizedValue < thresholdPreventRepeatedFlashUntilLowerThan)
+                {
+                    preventFlash = false;
+                }
             }
         }
 
