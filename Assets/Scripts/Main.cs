@@ -38,31 +38,37 @@ public class Main : MonoBehaviour
     /// <summary>
     /// Should we enable the NeuroGuideManager debug logs?
     /// </summary>
+    [NonSerialized]
     public bool logs = true;
 
     /// <summary>
     /// Should we enable the debug system for the NeuroGear hardware? This will enable keyboard events to control simulated NeuroGear hardware data spawned during the Create() method of NeuroGuideManager.cs
     /// </summary>
+    [NonSerialized]
     public bool debug = true;
 
     /// <summary>
     /// How long should this experience last if the user was in a reward state continuously?
     /// </summary>
+    [NonSerialized]
     public float experienceLengthInSeconds = 5f;
 
     /// <summary>
     /// Path to store the configuration file for this neuroguide experience. Can contain environment variables, and can contain escaped character sequences like \\ or \n
     /// </summary>
+    [NonSerialized]
     public string configPath = "%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json";
 
     /// <summary>
     /// UDP port address to listen to for NeuroGuide communication
     /// </summary>
+    [NonSerialized]
     public string address = "127.0.0.1";
 
     /// <summary>
     /// UDP port to listen to for NeuroGuide communication
     /// </summary>
+    [NonSerialized]
     public int port = 50000;
 
     #endregion
