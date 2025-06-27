@@ -1,7 +1,7 @@
 #region IMPORTS
 
 using UnityEngine;
-using System.Text.RegularExpressions;
+using System;
 
 #if EXT_DOTWEEN
 using DG.Tweening;
@@ -17,8 +17,6 @@ using gambit.config;
 
 #if UNITY_INPUT
 using UnityEngine.InputSystem;
-using System;
-
 #endif
 
 #if EXT_TOTALJSON
@@ -35,10 +33,12 @@ public class Main : MonoBehaviour
 
     #region PUBLIC - VARIABLES
 
+    [Tooltip("Set this to the config file path and name in the resources folder, do not include the file extension")]
+    public string pathAndFilenameToConfigInResources = "config";
+
     /// <summary>
-    /// Should we enable the NeuroGuideManager debug logs?
+    /// Should we enable the debug logs?
     /// </summary>
-    [NonSerialized]
     public bool logs = true;
 
     /// <summary>
@@ -91,109 +91,65 @@ public class Main : MonoBehaviour
     public void Start()
     //----------------------------------//
     {
+#if !EXT_DOTWEEN
+        Debug.LogError( "Main.cs Start() Missing 'EXT_DOTWEEN' scripting define symbol and/or package" );
+#endif
+#if !GAMBIT_NEUROGUIDE
+        Debug.LogError( "Main.cs Start() Missing 'GAMBIT_NEUROGUIDE' scripting define symbol and/or package" );
+#endif
+#if !GAMBIT_CONFIG
+        Debug.LogError( "Main.cs Start() Missing 'GAMBIT_CONFIG' scripting define symbol and/or package" );
+#endif
 #if !EXT_TOTALJSON
         Debug.LogError( "Main.cs Start() Missing 'EXT_TOTALJSON' scripting define symbol and/or package" );
 #endif
 
-        ConvertConfigPath();
-        CreateConfigManager();
+        LoadDataFromConfig();
 
     } //END Start Method
 
-#endregion
-
-    #region PRIVATE - CONVERT CONFIG PATH
-
-    /// <summary>
-    /// Converts the config file path to expand environment variables, also unescapes character sequences like \\ or \n
-    /// </summary>
-    //---------------------------------------------//
-    private void ConvertConfigPath()
-    //---------------------------------------------//
-    {
-        if( string.IsNullOrEmpty(configPath) )
-        {
-            Debug.LogError( "Main.cs ConvertConfigPath() configPath is null or empty. Unable to continue with experience. Please provide a path to store and retrieve the configuration file from" );
-            return;
-        }
-
-        //Unescape the string
-#pragma warning disable IDE0059 // Unnecessary assignment of a value
-#pragma warning disable CS0168
-        try
-        {
-            configPath = Regex.Unescape( configPath );
-        }
-        catch(Exception e)
-        {
-            //LogWarning( e.ToString() );
-        }
-#pragma warning restore CS0168
-#pragma warning restore IDE0059 // Unnecessary assignment of a value
-
-        //Expand any environment variables for the configPath
-        configPath = System.Environment.ExpandEnvironmentVariables( configPath );
-
-
-    } //END ConvertConfigPath Method
-
     #endregion
 
-    #region PRIVATE - CREATE CONFIG MANAGER
+    #region PRIVATE - LOAD DATA FROM CONFIG - UPDATE CONFIG IF NEEDED
 
     /// <summary>
-    /// Instantiates the config manager and loads a config file that has values that change this experience
+    /// Loads data from the local config, but first we check if our local is out of date and update it from resources
     /// </summary>
-    //----------------------------------//
-    public void CreateConfigManager()
-    //----------------------------------//
+    //-------------------------------------//
+    private void LoadDataFromConfig()
+    //-------------------------------------//
     {
-        ConfigManager.Create
-        (
-            new ConfigManager.Options()
-            {
-                path = configPath,
-                showDebugLogs = logs
-            },
 
+#if GAMBIT_CONFIG && EXT_TOTALJSON
+
+        ConfigManager.UpdateLocalDataAndReturn
+        (
+            pathAndFilenameToConfigInResources,
+            logs,
             (ConfigManager.ConfigManagerSystem system)=>
             {
                 configSystem = system;
-
-#if EXT_TOTALJSON
-                //If the config file doesn't exist, spawn it and grab the data from it
-                if(!ConfigManager.DoesFileExist( configPath ))
-                {
-                    ConfigManager.ReplaceFileUsingResources( configSystem, "config", SetVariablesFromConfig, LogError );
-                }
-                else
-                {
-                    //Otherwise just grab the config json data
-                    ConfigManager.ReadFileContents( configSystem, SetVariablesFromConfig, LogError );
-                }
-#endif
-
-                return;
+                SetVariablesFromConfig();
             },
-
             LogError
-
         );
 
-    } //END CreateConfigManager Method
+#endif
 
-    #endregion
+    } //END LoadDataFromConfig Method
+
+#endregion
 
     #region PRIVATE - SET VARIABLES FROM CONFIG
 
-#if EXT_TOTALJSON
+#if GAMBIT_CONFIG && EXT_TOTALJSON
 
     /// <summary>
     /// Pull variables from the config file to use as our experience variables
     /// </summary>
     /// <param name="json"></param>
     //---------------------------------------------------//
-    private void SetVariablesFromConfig( JSON json )
+    private void SetVariablesFromConfig()
     //---------------------------------------------------//
     {
         //How many variables do we need to wait for to load?
@@ -326,6 +282,8 @@ public class Main : MonoBehaviour
     //---------------------------------------------//
     {
 
+#if GAMBIT_NEUROGUIDE
+
         NeuroGuideManager.Create
         (
             //Options
@@ -359,6 +317,8 @@ public class Main : MonoBehaviour
                 if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() State changed to " + state.ToString() );
             } );
 
+#endif
+
     } //END CreateNeuroGuideManager Method
 
     #endregion
@@ -372,6 +332,8 @@ public class Main : MonoBehaviour
     private void CreateNeuroGuideExperience()
     //---------------------------------------------//
     {
+
+#if GAMBIT_NEUROGUIDE
 
         NeuroGuideExperience.Create
         (
@@ -398,6 +360,8 @@ public class Main : MonoBehaviour
             }
 
         );
+
+#endif
 
     } //END CreateNeuroGuideExperience Method
 

@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "e09d38957e75f246f5d31e7bc70cccd53002fb8e"
+      "hash": "469ea45509501f78159107d93416fd7587d43b90"
     },
     "com.gambit.mathhelper": {
       "version": "https://github.com/GambitGamesLLC/unity-math-helper.git?path=Assets/Plugins/Package",
