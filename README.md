@@ -84,3 +84,23 @@ NeuroGuide experiences like `Building Blocks` rely on a JSON configuration file 
 - `logs` - Do we want Unity console logs to be printed?  
 - `debug` - Do we want to enable debug mode for this app? For Building Blocks, this will fake incoming UDP port traffice as if the NeuroGuide Software was sending us messages
 - `length` - How long should this experience last (in seconds) if the user was in a "success" state the entire time?
+
+---  
+
+## DEPENDENCIES
+
+Relies on several `Unity Asset Store` plugins as well as Open Source `Gambit Games` packages  
+
+Please make sure the proper `scripting define symbols` and packages are imported into your project.  
+This should happen automatically when opening this repo in Unity3D thanks to the package manager.  
+
+Check the package repos directly for their `scripting define symbols`, `namespaces` and guides.  
+
+`DoTween` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-dotween) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)  
+- Used to perform tweens
+
+`TotalJSON` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-totaljson) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/input-management/total-json-130344)  
+- Used for JSON manipulation
+
+`Gambit Configuration Manager` [Gambit Repo](https://github.com/GambitGamesLLC/unity-config-manager.git?path=Assets/Plugins/Package)  
+- 
