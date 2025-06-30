@@ -38,10 +38,10 @@ When the user is not in a success state, the cube splits apart.
 NeuroGuide experiences like `Building Blocks` rely on a JSON configuration file to define their properties.  
 
 - A `config.json` file is stored in our Resources folder of the project, and can be updated to modify the application  
-- This `config.json` file is copied to our %LOCALAPPDATA% folder, specifically in the path specified in the `config:path` object  
+- This `config.json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
 - If there already exists a `config.json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
 
-- Locate and open the configuration json file within the resources folder, named 'config.json', which has contents similar to this
+- Locate and open the configuration json file within the resources folder, named `config.json`, which has contents similar to this
 ```json
 {
   "config": {
@@ -77,8 +77,8 @@ NeuroGuide experiences like `Building Blocks` rely on a JSON configuration file 
 - `path` - The path to the executable for this project. Like other stored Path variables, this will have any environment variables expanded and will be deserialized.  
   
 <b>`communication` OBJECT  </b>
-- `address` - The UDP port address we want to use for communication with the NeuroGuide Software. 127.0.0.1 is shorthand for a local PC message  
-- `port` - The UDP port value we will listen to for updates. 50000 is a common port value for inter-app communication while unlikely to have cross messaging issues
+- `address` - The UDP port address we want to use for communication with the NeuroGuide Software. `127.0.0.1` is shorthand for a local PC message  
+- `port` - The UDP port value we will listen to for updates. `50000` is a common port value for inter-app communication while unlikely to have cross messaging issues
 
 <b>`experience` OBJECT  </b>
 - `logs` - Do we want Unity console logs to be printed?  
