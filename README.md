@@ -12,7 +12,7 @@ When the user is not in a success state, the cube splits apart.
 
 ## PLAY INSTRUCTIONS
 
-- Open Scenes/Experience 2 - M3D
+- Open `Scenes/Experience 2 - M3D`
 - Press Play in the editor
 - Use your keyboard up and down keys to fake the UDP data being sent from the NeuroGuide software
 
@@ -26,9 +26,9 @@ When the user is not in a success state, the cube splits apart.
 
 ## INSTALL INSTRUCTIONS
 
-- Create the folder path %LOCALAPPDATA%M3DVR/BuildingBlocks on your PC.
-- For Example. C:\Users\Derrick\AppData\Local\M3DVR\BuildingBlocks
-- Copy the build artifact to this new folder so that the executable to run the app is at %LOCALAPPDATA%/M3DVR/BuildingBlocks/BuildingBlocks.exe
+- Create the folder path `%LOCALAPPDATA%M3DVR/BuildingBlocks` on your PC.
+- For Example. `C:\Users\Derrick\AppData\Local\M3DVR\BuildingBlocks`
+- Copy the build artifact to this new folder so that the executable to run the app is at `%LOCALAPPDATA%/M3DVR/BuildingBlocks/BuildingBlocks.exe`
 - This should also line up with the paths preset in the config.json file in the Resources folder
 
 ---  
