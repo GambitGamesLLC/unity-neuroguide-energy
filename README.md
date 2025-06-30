@@ -96,11 +96,20 @@ This should happen automatically when opening this repo in Unity3D thanks to the
 
 Check the package repos directly for their `scripting define symbols`, `namespaces` and guides.  
 
-`DoTween` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-dotween) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)  
-- Used to perform tweens
+- `DoTween` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-dotween) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)  
+- Used to perform tweens  
 
-`TotalJSON` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-totaljson) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/input-management/total-json-130344)  
-- Used for JSON manipulation
-
-`Gambit Configuration Manager` [Gambit Repo](https://github.com/GambitGamesLLC/unity-config-manager.git?path=Assets/Plugins/Package)  
-- 
+- `TotalJSON` [Gambit Repo](https://github.com/GambitGamesLLC/unity-plugin-totaljson) | [Unity Asset Store Link](https://assetstore.unity.com/packages/tools/input-management/total-json-130344)  
+- Used for JSON manipulation  
+  
+- `Gambit Configuration Manager` [Gambit Repo](https://github.com/GambitGamesLLC/unity-config-manager.git?path=Assets/Plugins/Package)  
+- Used for manipulation, saving, and loading of `.json` config files  
+  
+- `Math Helper` [Gambit Repo](https://github.com/GambitGamesLLC/unity-math-helper)  
+- Contains convenience functions for math functionality, such as Map(), which converts one value in a range to another  
+  
+- `NeuroGuide Manager` [Gambit Repo](https://github.com/GambitGamesLLC/unity-neuroguide-manager.git)  
+- Reads data from the NeuroGuide Software via UDP ports  
+  
+- `Singleton Manager` [Gambit Repo](https://github.com/GambitGamesLLC/unity-singleton)
+- Convenience function to easily create global singletons that retain Unity Lifecycle functionality such as a GameObject Instance
