@@ -20,4 +20,67 @@ When the user is not in a success state, the cube splits apart.
 
 ## BUILD INSTRUCTIONS
 
-- writing in progress
+- No special build instructions, simply make a Windows desktop build
+
+---  
+
+## INSTALL INSTRUCTIONS
+
+- Create the folder path %LOCALAPPDATA%M3DVR/BuildingBlocks on your PC.
+- For Example. C:\Users\Derrick\AppData\Local\M3DVR\BuildingBlocks
+- Copy the build artifact to this new folder so that the executable to run the app is at %LOCALAPPDATA%/M3DVR/BuildingBlocks/BuildingBlocks.exe
+- This should also line up with the paths preset in the config.json file in the Resources folder
+
+---  
+
+## CONFIGURATION FILE INSTRUCTIONS
+
+NeuroGuide experiences like `Building Blocks` rely on a JSON configuration file to define their properties.  
+
+- A `config.json` file is stored in our Resources folder of the project, and can be updated to modify the application  
+- This `config.json` file is copied to our %LOCALAPPDATA% folder, specifically in the path specified in the `config:path` object  
+- If there already exists a `config.json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
+
+- Locate and open the configuration json file within the resources folder, named 'config.json', which has contents similar to this
+```json
+{
+  "config": {
+		"version": 0,
+		"timestamp": "2025-06-26 11:48:00",
+		"path": "%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json"
+	},
+  "app": {
+		"longname": "M3DVR NeuroGuide Experience - Building Blocks",
+		"shortname": "M3DVR_BuildingBlocks",
+		"path": "%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\BuildingBlocks.exe"
+	},
+	"communication": {
+		"address": "127.0.0.1",
+		"port": 50000
+	},
+	"experience": {
+		"logs": true,
+		"debug": true,
+		"length": 8
+	}
+}
+```
+  
+<b>`config` OBJECT  </b>
+- `version` - Defines the version number of the configuration file, used to see if this is newer than a config file we're comparing against.  
+- `timestamp` - If the version of both config files matches, we check this timestamp to see if one is newer.  
+- `path` - The path to the config file on local storage. This path has its environment variables expanded and is deserialized, so it can be used for normal Path operations in Unity.  
+  
+<b>`app` OBJECT  </b>
+- `longname` - Used by external software like the M3DVR launcher app to show the app name in a human readable format  
+- `shortname` - Used by external software like the M3DVR launcher app to reference the app in a non-human readable format  
+- `path` - The path to the executable for this project. Like other stored Path variables, this will have any environment variables expanded and will be deserialized.  
+  
+<b>`communication` OBJECT  </b>
+- `address` - The UDP port address we want to use for communication with the NeuroGuide Software. 127.0.0.1 is shorthand for a local PC message  
+- `port` - The UDP port value we will listen to for updates. 50000 is a common port value for inter-app communication while unlikely to have cross messaging issues
+
+<b>`experience` OBJECT  </b>
+- `logs` - Do we want Unity console logs to be printed?  
+- `debug` - Do we want to enable debug mode for this app? For Building Blocks, this will fake incoming UDP port traffice as if the NeuroGuide Software was sending us messages
+- `length` - How long should this experience last (in seconds) if the user was in a "success" state the entire time?
