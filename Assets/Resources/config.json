@@ -1,6 +1,6 @@
 {
 	"config": {
-		"version": 0,
+		"version": 1,
 		"timestamp": "2025-06-26 11:48:00",
 		"path": "%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json"
 	},
@@ -16,6 +16,6 @@
 	"experience": {
 		"logs": true,
 		"debug": true,
-		"length": 8
+		"length": 1
 	}
 }

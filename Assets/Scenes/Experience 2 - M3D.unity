@@ -7934,6 +7934,8 @@ GameObject:
   - component: {fileID: 1928358900}
   - component: {fileID: 1928358903}
   - component: {fileID: 1928358904}
+  - component: {fileID: 1928358905}
+  - component: {fileID: 1928358906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8009,7 +8011,7 @@ Transform:
   m_GameObject: {fileID: 1928358899}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08003278, y: -0, z: -0, w: 0.9967922}
-  m_LocalPosition: {x: 0, y: 55, z: -95.9}
+  m_LocalPosition: {x: 0, y: 81.9, z: -262.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8198,6 +8200,42 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!95 &1928358905
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928358899}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43eca8f2477ee40498c129d2145f13e8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1928358906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928358899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990c165d966cbf64db6d5ccc22f6c6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1928358905}
+  threshold: 0.99
 --- !u!1 &1935228496
 GameObject:
   m_ObjectHideFlags: 0
@@ -9056,11 +9094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6331993451173322977, guid: d26f3629b13b9564983343ee1f5fbcc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.3
+      value: 11.3
       objectReference: {fileID: 0}
     - target: {fileID: 6331993451173322977, guid: d26f3629b13b9564983343ee1f5fbcc9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.5
+      value: 23.3
       objectReference: {fileID: 0}
     - target: {fileID: 6331993451173322977, guid: d26f3629b13b9564983343ee1f5fbcc9, type: 3}
       propertyPath: m_LocalRotation.w
