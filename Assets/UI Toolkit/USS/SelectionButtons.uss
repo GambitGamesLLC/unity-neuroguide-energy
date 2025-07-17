@@ -12,12 +12,12 @@
     color: rgb(209, 209, 209);
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     transition-duration: 0.5s;
-    width: 45%;
+    width: 40%;
     font-size: 25px;
 }
 
 .button:hover {
-    height: 45px;
+    height: 40%;
     align-self: center;
     background-color: rgba(0, 0, 0, 0.72);
     border-left-color: rgba(211, 211, 211, 0.46);
@@ -27,4 +27,5 @@
     color: rgb(111, 111, 111);
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     transition-duration: 0.5s;
+    width: 40%;
 }
