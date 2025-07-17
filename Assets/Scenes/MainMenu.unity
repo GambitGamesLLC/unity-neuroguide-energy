@@ -263,7 +263,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 765358323}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 219728205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 219728204}
+  fadeInOutScript: {fileID: 996623580}
 --- !u!114 &219728204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 6bf5e8cadf6df0546b984b5e4e3b16a4, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: bdb6f95822eb12f40a70a18657e51488, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 1064c82598bbd7643a464c3b9f4dabf9, type: 3}
   m_SortingOrder: 15
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -564,7 +565,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 152985717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &765358322
@@ -624,7 +626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: beb269f4e115f4745a0bd1252eeabc4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ea2ff36f6ee14f4bb26bc6d7afe8720, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -642,6 +644,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765358322}
   m_CullTransparentMesh: 1
+--- !u!114 &996623580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2698332075489660893, guid: 510b6edda9a91084eb4fe7ec486ac0cc, type: 3}
+  m_PrefabInstance: {fileID: 2058358839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6135794b69eab408ec827890b992ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1475342226
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,10 +742,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2036448837526863281, guid: 510b6edda9a91084eb4fe7ec486ac0cc, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3375879887019564232, guid: 510b6edda9a91084eb4fe7ec486ac0cc, type: 3}
       propertyPath: m_Name
       value: FullscreenFadein
@@ -829,6 +838,5 @@ SceneRoots:
   - {fileID: 219728205}
   - {fileID: 165606392}
   - {fileID: 48455609}
-  - {fileID: 152985717}
   - {fileID: 1475342229}
   - {fileID: 2058358839}

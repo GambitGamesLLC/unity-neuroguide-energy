@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/UIStyle.uss?fileID=7433441132597879392&amp;guid=3f4900d35a7480e48ba0ec4c9655f804&amp;type=3#UIStyle" />
+    <ui:VisualElement name="MainMenu" style="flex-grow: 1;">
+        <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; flex-direction: row-reverse; align-self: flex-end; width: auto; height: auto; translate: 0% 0%; transform-origin: center; top: auto; position: relative; left: 0%; display: flex; visibility: visible; overflow: visible;">
+            <ui:Button name="ExitButton" class="button" />
+            <ui:Button name="SettingsButton" enabled="true" class="button" style="height: 15px; width: 15px; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); text-shadow: 0 2.1px 2.6px rgb(0, 0, 0); background-image: url(&quot;project://database/Assets/UI/Cog.png?fileID=2800000&amp;guid=8bbed59ccc1af25449e2ac30e98477cc&amp;type=3#Cog&quot;); translate: 0 5px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="TextContainer" style="flex-grow: 1; align-items: center; align-self: center; flex-direction: column-reverse; width: 1099px; height: 570px; translate: 0 4px;">
+            <ui:Label text="Press anywhere to begin" name="PressAnywhere" class="label" />
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; width: 461px;">
+                <ui:Button icon-image="project://database/Assets/UI/NESTRELOGO_bnw.png?fileID=2800000&amp;guid=a1a90eb531440684a845ade2a629835d&amp;type=3#NESTRELOGO_bnw" style="width: 487px; height: 178px; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); translate: 0 0%; align-self: center; text-shadow: 0 0 0 rgba(0, 0, 0, 0); top: 10%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
