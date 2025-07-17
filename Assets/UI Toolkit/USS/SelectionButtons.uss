@@ -2,7 +2,7 @@
 }
 
 .button {
-    height: 40%;
+    height: 35%;
     align-self: center;
     background-color: rgba(0, 0, 0, 0.35);
     border-left-color: rgba(211, 211, 211, 0.46);
@@ -13,11 +13,11 @@
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     transition-duration: 0.5s;
     width: 40%;
-    font-size: 25px;
+    font-size: 32px;
 }
 
 .button:hover {
-    height: 40%;
+    height: 35%;
     align-self: center;
     background-color: rgba(0, 0, 0, 0.72);
     border-left-color: rgba(211, 211, 211, 0.46);
@@ -28,4 +28,5 @@
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     transition-duration: 0.5s;
     width: 40%;
+    font-size: 32px;
 }

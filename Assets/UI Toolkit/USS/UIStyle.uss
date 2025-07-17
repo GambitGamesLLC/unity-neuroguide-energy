@@ -31,7 +31,7 @@
     bottom: auto;
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     color: rgba(126, 126, 126, 0.69);
-    font-size: 20px;
+    font-size: 32px;
     -unity-font-style: normal;
     word-spacing: 20px;
     text-shadow: 1px 2px 12px rgb(0, 0, 0);
@@ -44,11 +44,12 @@
     align-items: center;
     flex-direction: column-reverse;
     justify-content: flex-end;
-    width: 218px;
+    width: 344px;
     height: 33px;
     transition-duration: 0.5s, 1s;
     transition-timing-function: ease-in, ease;
     transition-delay: 0s, 1s;
+    -unity-text-align: middle-center;
 }
 
 .button {

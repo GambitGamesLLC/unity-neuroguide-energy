@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MainMenu" src="project://database/Assets/UI%20Toolkit/UXML/MainMenu.uxml?fileID=9197481963319205126&amp;guid=bdb6f95822eb12f40a70a18657e51488&amp;type=3#MainMenu" />
     <ui:Template name="SelectionMenu" src="project://database/Assets/UI%20Toolkit/UXML/SelectionMenu.uxml?fileID=9197481963319205126&amp;guid=1f3613fba5891e34980f0c16c5d70da9&amp;type=3#SelectionMenu" />
-    <ui:Instance template="MainMenu" name="MainMenuContainer" style="display: flex;" />
+    <ui:Instance template="MainMenu" name="MainMenuContainer" style="display: flex; visibility: visible;" />
     <ui:Instance template="SelectionMenu" name="SelectionContainer" style="display: none; height: auto; flex-grow: 1; visibility: hidden;" />
 </ui:UXML>
