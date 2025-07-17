@@ -24,7 +24,7 @@
     border-right-color: rgba(211, 211, 211, 0.46);
     border-top-color: rgba(211, 211, 211, 0.46);
     border-bottom-color: rgba(211, 211, 211, 0.46);
-    color: rgb(111, 111, 111);
+    color: rgb(209, 209, 209);
     -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&guid=f036e2d87c81bb94ca14a21b811eadc6&type=3#Charger-XRDo");
     transition-duration: 0.5s;
     width: 40%;
