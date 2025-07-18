@@ -6,8 +6,8 @@
             <ui:Label name="Cube" style="background-image: url(&quot;project://database/Assets/UI/cube.jpg?fileID=2800000&amp;guid=1c7c7fd7c2272f74cb9593a3ae1f1fae&amp;type=3#cube&quot;); height: 55%; width: 30%;" />
         </ui:VisualElement>
         <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; align-self: center; justify-content: space-around; width: 1600px; top: -22%; flex-shrink: 1; align-items: center; height: 250px;">
-            <ui:Button text="Experience 1" name="Exp1" class="button" style="height: 35%; align-self: center; width: 30%; font-size: 32px; text-shadow: 0 2px 14px rgb(0, 0, 0);" />
-            <ui:Button text="Experience 2" name="Exp2" class="button" style="width: 30%; height: 35%; font-size: 32px; text-shadow: 0 2px 14px rgb(0, 0, 0);" />
+            <ui:Button text="Brain Waves&#10;" name="Exp1" class="button" style="height: 35%; align-self: center; width: 30%; font-size: 32px; text-shadow: 0 2px 14px rgb(0, 0, 0);" />
+            <ui:Button text="Tesseract" name="Exp2" class="button" style="width: 30%; height: 35%; font-size: 32px; text-shadow: 0 2px 14px rgb(0, 0, 0);" />
         </ui:VisualElement>
         <ui:Label text="Select your experience" name="SelectYourExperience" style="align-self: center; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/Charger-XRDo.otf?fileID=12800000&amp;guid=f036e2d87c81bb94ca14a21b811eadc6&amp;type=3#Charger-XRDo&quot;); font-size: 32px; color: rgb(211, 211, 211); bottom: 9%; text-shadow: 0 2px 15.2px rgb(0, 0, 0);" />
     </ui:VisualElement>
