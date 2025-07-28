@@ -77,19 +77,19 @@ public class HyperCubesParent : MonoBehaviour, INeuroGuideInteractable
         // Calculate the target rotation by adding to the initial Y rotation.
         // A value of 0 results in the initial rotation.
         // A value of 1 results in the initial rotation + 360 degrees.
-        float targetYRotation = _initialYRotation + (value * 360f );
+        //float targetYRotation = _initialYRotation + (value * 360f );
 
         // Get the current local rotation of the transform
-        Vector3 currentRotation = hypercubeParent.transform.localEulerAngles;
+        //Vector3 currentRotation = hypercubeParent.transform.localEulerAngles;
 
         // Create the target rotation vector, using the stored initial X and Z rotations.
-        Vector3 targetRotation = new Vector3( _initialXRotation, targetYRotation, _initialZRotation );
+        //Vector3 targetRotation = new Vector3( _initialXRotation, targetYRotation, _initialZRotation );
 
 #if EXT_DOTWEEN
         // Use DOTween to rotate the transform to the target rotation over the specified duration.
         // We use RotateMode.FastBeyond360 to ensure it takes the shortest path, 
         // but adding 360 degrees will always result in a full circle.
-        hypercubeParent.transform.DOLocalRotate( targetRotation, 0.1f, RotateMode.Fast );
+        //hypercubeParent.transform.DOLocalRotate( targetRotation, 0.1f, RotateMode.Fast );
 #endif
 
     } //END OnDataUpdate Method
