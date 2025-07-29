@@ -33,13 +33,13 @@ public class HypercubeSpin : MonoBehaviour, INeuroGuideInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayAnimationDirectly("HypercubeAnim");
+        PlayAnimationDirectly("pieces_spin");
         animator.speed = 0f;
     }
 
     public void OnDataUpdate(float value)
     {
-        PlayAnimationDirectly("HypercubeAnim", 0, value);
+        PlayAnimationDirectly("pieces_spin", 0, value);
     }
 
     public void PlayAnimationDirectly(string stateName, int layer = 0, float normalizedTime = 0f)

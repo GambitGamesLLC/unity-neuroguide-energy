@@ -45,8 +45,8 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     {
 
         hypercube.SetActive( false );
-        PlayAnimationDirectly("HypercubeAnim");
-        animator.speed = 0f;
+        //PlayAnimationDirectly("HypercubeAnim");
+        //animator.speed = 0f;
 
     } //END Start
 
@@ -62,7 +62,7 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( float value )
     //------------------------------------------------------------------------//
     {
-        PlayAnimationDirectly("HypercubeAnim", 0, value);
+        //PlayAnimationDirectly("HypercubeAnim", 0, value);
 
         if ( value >= threshold )
         {
