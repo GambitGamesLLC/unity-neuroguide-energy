@@ -8,6 +8,10 @@
 using gambit.neuroguide;
 #endif
 
+#if GAMBIT_MATHHELPER
+using gambit.mathhelper;
+#endif
+
 using UnityEngine;
 
 #endregion
@@ -21,6 +25,7 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     #region PUBLIC - VARIABLES
 
     public GameObject hypercube;
+    public Animator animator;
 
     /// <summary>
     /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
@@ -40,6 +45,8 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     {
 
         hypercube.SetActive( false );
+        PlayAnimationDirectly("HypercubeAnim");
+        animator.speed = 0f;
 
     } //END Start
 
@@ -55,7 +62,9 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     public void OnDataUpdate( float value )
     //------------------------------------------------------------------------//
     {
-        if( value >= threshold )
+        PlayAnimationDirectly("HypercubeAnim", 0, value);
+
+        if ( value >= threshold )
         {
             hypercube.SetActive( true );
         }
@@ -67,6 +76,15 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable
     } //END OnDataUpdate Method
 
     #endregion
+    public void PlayAnimationDirectly(string stateName, int layer = 0, float normalizedTime = 0f)
+    //-----------------------------------------------------------------//
+    {
+        if (animator != null && animator.gameObject.activeSelf)
+        {
+            animator.Play(stateName, 0, normalizedTime);
+        }
+
+    } //END PlayAnimationDirectly
 
 } //END HyperCube Class
 

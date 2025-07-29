@@ -5700,15 +5700,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5dbd28afec978dc42b23fc9601de21f3, type: 2}
     - target: {fileID: -3728331148279435443, guid: d39a0159840f88342b6a478a0464a465, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.62789094
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3728331148279435443, guid: d39a0159840f88342b6a478a0464a465, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.15037665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3728331148279435443, guid: d39a0159840f88342b6a478a0464a465, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 2.532458
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3662785489782256145, guid: d39a0159840f88342b6a478a0464a465, type: 3}
       propertyPath: m_Materials.Array.size
@@ -5962,8 +5962,8 @@ MonoBehaviour:
   grungeMax: 1.1
   transition_material: {fileID: 2100000, guid: 5dbd28afec978dc42b23fc9601de21f3, type: 2}
   transitionMin: 0
-  transitionMax: 0.5
-  threshold: 0.99
+  transitionMax: 0.8
+  threshold: 0.5
 --- !u!1 &698653693
 GameObject:
   m_ObjectHideFlags: 0
@@ -7247,7 +7247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hypercube: {fileID: 1981093132}
-  threshold: 0.99
+  animator: {fileID: 1981093134}
+  threshold: 0.5
 --- !u!95 &1981093134
 Animator:
   serializedVersion: 7
@@ -7270,6 +7271,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1981093135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981093132}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a5fa24de3ffca4eac48bee3bb72a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1981093134}
+  threshold: 0.99
 --- !u!1001 &3012628966636764136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7428,6 +7443,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5219248428813078016, guid: 1534f3c6babcce74d93171527ece953d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1981093134}
+    - targetCorrespondingSourceObject: {fileID: 5219248428813078016, guid: 1534f3c6babcce74d93171527ece953d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1981093135}
     - targetCorrespondingSourceObject: {fileID: 1743007127048763230, guid: 1534f3c6babcce74d93171527ece953d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3012628966636764138}
