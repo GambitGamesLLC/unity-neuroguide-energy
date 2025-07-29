@@ -1,5 +1,6 @@
 #region IMPORTS
 
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -13,6 +14,10 @@ using gambit.neuroguide;
 
 #if GAMBIT_CONFIG
 using gambit.config;
+#endif
+
+#if GAMBIT_PROCESS
+using gambit.process;
 #endif
 
 #if UNITY_INPUT
@@ -33,9 +38,6 @@ public class Main : MonoBehaviour
 
     #region PUBLIC - VARIABLES
 
-    [Tooltip("Set this to the config file path and name in the resources folder, do not include the file extension")]
-    public string pathAndFilenameToConfigInResources = "config";
-
     /// <summary>
     /// Should we enable the debug logs?
     /// </summary>
@@ -44,31 +46,21 @@ public class Main : MonoBehaviour
     /// <summary>
     /// Should we enable the debug system for the NeuroGear hardware? This will enable keyboard events to control simulated NeuroGear hardware data spawned during the Create() method of NeuroGuideManager.cs
     /// </summary>
-    [NonSerialized]
     public bool debug = true;
 
     /// <summary>
     /// How long should this experience last if the user was in a reward state continuously?
     /// </summary>
-    [NonSerialized]
-    public float experienceLengthInSeconds = 5f;
-
-    /// <summary>
-    /// Path to store the configuration file for this neuroguide experience. Can contain environment variables, and can contain escaped character sequences like \\ or \n
-    /// </summary>
-    [NonSerialized]
-    public string configPath = "%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json";
+    public float length = 1f;
 
     /// <summary>
     /// UDP port address to listen to for NeuroGuide communication
     /// </summary>
-    [NonSerialized]
     public string address = "127.0.0.1";
 
     /// <summary>
     /// UDP port to listen to for NeuroGuide communication
     /// </summary>
-    [NonSerialized]
     public int port = 50000;
 
     #endregion
@@ -103,8 +95,11 @@ public class Main : MonoBehaviour
 #if !EXT_TOTALJSON
         Debug.LogError( "Main.cs Start() Missing 'EXT_TOTALJSON' scripting define symbol and/or package" );
 #endif
+#if !GAMBIT_PROCESS
+        Debug.LogError( "Main.cs Start() Missing 'GAMBIT_PROCESS' scripting define symbol and/or package" );
+#endif
 
-        LoadDataFromConfig();
+        LoadDataFromProcess();
 
     } //END Start Method
 
@@ -113,164 +108,80 @@ public class Main : MonoBehaviour
     #region PRIVATE - LOAD DATA FROM CONFIG - UPDATE CONFIG IF NEEDED
 
     /// <summary>
-    /// Loads data from the local config, but first we check if our local is out of date and update it from resources
+    /// Loads data that was passed into the process
     /// </summary>
     //-------------------------------------//
-    private void LoadDataFromConfig()
+    private void LoadDataFromProcess()
     //-------------------------------------//
     {
 
-#if GAMBIT_CONFIG && EXT_TOTALJSON
+#if GAMBIT_PROCESS
 
-        ConfigManager.UpdateLocalDataAndReturn
-        (
-            pathAndFilenameToConfigInResources,
-            logs,
-            (ConfigManager.ConfigManagerSystem system)=>
+        List<string> keys = ProcessManager.ReadArgumentKeys();
+        List<string> values = ProcessManager.ReadArgumentValues();
+
+        if(keys == null || (keys != null && keys.Count == 0) ||
+           values == null || (values != null && values.Count == 0) ||
+           keys.Count != values.Count)
+        {
+            Debug.Log( "Skipping Reading Key-Values : Keys.Count = " + keys.Count + ", Values.Count = " + values.Count );
+
+            for(int i = 0; i < keys.Count; ++i)
             {
-                configSystem = system;
-                SetVariablesFromConfig();
-            },
-            LogError
-        );
+                Debug.Log( "key : " + keys[ i ] );
+            }
 
-#endif
+            for(int i = 0; i < values.Count; ++i)
+            {
+                Debug.Log( "value : " + values[i] );
+            }
+            
+            CreateNeuroGuideManager();
+            return;
+        }
 
-    } //END LoadDataFromConfig Method
+        for(int i = 0; i < keys.Count; ++i)
+        {
+            string key = keys[ i ];
+            string value = values[ i ];
 
-#endregion
-
-    #region PRIVATE - SET VARIABLES FROM CONFIG
-
-#if GAMBIT_CONFIG && EXT_TOTALJSON
-
-    /// <summary>
-    /// Pull variables from the config file to use as our experience variables
-    /// </summary>
-    /// <param name="json"></param>
-    //---------------------------------------------------//
-    private void SetVariablesFromConfig()
-    //---------------------------------------------------//
-    {
-        //How many variables do we need to wait for to load?
-        int isReady = 0;
-        int waitForCount = 5;
-
-
-        //Set the 'address' variable, should be within the 'communication' object and the 'address' key
-        ConfigManager.GetNestedString
-        (
-            configSystem,
-            new string[ ] { "communication", "address" },
-            ( string value ) =>
+            if(key == "logs")
+            {
+                logs = bool.Parse( value );
+            }
+            else if(key == "debug")
+            {
+                debug = bool.Parse( value );
+            }
+            else if(key == "length")
+            {
+                length = int.Parse( value );
+            }
+            else if(key == "address")
             {
                 address = value;
-                isReady++;
-                if( isReady == waitForCount )
-                {
-                    CreateNeuroGuideManager();
-                }
-            },
-            LogError
-        );
-
-        //Set the 'port' variable, should be within the 'communication' object and the 'port' key
-        ConfigManager.GetNestedInteger
-        (
-            configSystem,
-            new string[ ] { "communication", "port" },
-            ( int value ) =>
-            {
-                port = value;
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
-            },
-            LogError
-        );
-
-        //Set the 'logs' variable, should be within the 'experience' object and 'logs' key
-        ConfigManager.GetNestedBool
-        (
-            configSystem,
-            new string[ ] { "experience", "logs" },
-            (bool value)=>
-            {
-                logs = value;
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
-            },
-            (string error)=>
-            {
-                LogWarning( error );
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
             }
-        );
-
-        //Set the 'debug' variable, should be within the 'experience' object and 'debug' key
-        ConfigManager.GetNestedBool
-        (
-            configSystem,
-            new string[ ] { "experience", "debug"},
-            (bool value)=>
+            else if(key == "port")
             {
-                debug = value;
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
-            },
-            ( string error ) =>
-            {
-                LogWarning( error );
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
+                port = int.Parse( value );
             }
-        );
 
-        //Set the 'length' variable, should be within the 'experience' object and the 'length' key
-        ConfigManager.GetNestedFloat
-        (
-            configSystem,
-            new string[ ] { "experience", "length" },
-            (float value)=>
-            {
-                experienceLengthInSeconds = value;
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
-            },
-            ( string error ) =>
-            {
-                LogWarning( error );
-                isReady++;
-                if(isReady == waitForCount)
-                {
-                    CreateNeuroGuideManager();
-                }
-            }
-        );
+        }
 
-    } //END SetVariablesFromConfig Method
-
+        if(logs)
+        {
+            Debug.Log( "logs : " + logs );
+            Debug.Log( "debug : " + debug );
+            Debug.Log( "length : " + length );
+            Debug.Log( "address : " + address );
+            Debug.Log( "port : " + port );
+        }
+        
 #endif
 
-#endregion
+    } //END LoadDataFromProcess Method
+
+    #endregion
 
     #region PRIVATE - CREATE NEUROGUIDE MANAGER
 
@@ -341,7 +252,7 @@ public class Main : MonoBehaviour
             new NeuroGuideExperience.Options()
             {
                 showDebugLogs = logs,
-                totalDurationInSeconds = experienceLengthInSeconds
+                totalDurationInSeconds = length
             },
 
             //OnSuccess
