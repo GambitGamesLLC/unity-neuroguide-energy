@@ -124,6 +124,11 @@ public class Main : MonoBehaviour
            values == null || (values != null && values.Count == 0) ||
            keys.Count != values.Count)
         {
+            foreach( string commandLineArg in System.Environment.GetCommandLineArgs() )
+            {
+                Debug.Log( "CommandLineArg : " + commandLineArg );
+            }
+
             Debug.Log( "Skipping Reading Key-Values : Keys.Count = " + keys.Count + ", Values.Count = " + values.Count );
 
             for(int i = 0; i < keys.Count; ++i)
