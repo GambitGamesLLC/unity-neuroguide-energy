@@ -105,7 +105,7 @@ public class Main : MonoBehaviour
 
     #endregion
 
-    #region PRIVATE - LOAD DATA FROM CONFIG - UPDATE CONFIG IF NEEDED
+    #region PRIVATE - LOAD DATA FROM PROCESS IF AVAILABLE
 
     /// <summary>
     /// Loads data that was passed into the process
@@ -117,38 +117,39 @@ public class Main : MonoBehaviour
 
 #if GAMBIT_PROCESS
 
+
         List<string> keys = ProcessManager.ReadArgumentKeys();
         List<string> values = ProcessManager.ReadArgumentValues();
 
+        Debug.Log( "keys.count = " + keys.Count + ", values.count = " + values.Count );
+
+        //If we have no command line key/values to read, skip this step
         if(keys == null || (keys != null && keys.Count == 0) ||
-           values == null || (values != null && values.Count == 0) ||
-           keys.Count != values.Count)
+           values == null || (values != null && values.Count == 0) )
         {
-            foreach( string commandLineArg in System.Environment.GetCommandLineArgs() )
-            {
-                Debug.Log( "CommandLineArg : " + commandLineArg );
-            }
+            Debug.LogWarning( "Main.cs LoadDataFromProcess() either keys or values are null, usind defaults set in editor instead of data from process" );
+            CreateNeuroGuideManager();
+            return;
+        }
 
-            Debug.Log( "Skipping Reading Key-Values : Keys.Count = " + keys.Count + ", Values.Count = " + values.Count );
-
-            for(int i = 0; i < keys.Count; ++i)
-            {
-                Debug.Log( "key : " + keys[ i ] );
-            }
-
-            for(int i = 0; i < values.Count; ++i)
-            {
-                Debug.Log( "value : " + values[i] );
-            }
-            
+        //If our key/value pairs are not in sync, something went wrong, skip this step
+        if( keys.Count != values.Count )
+        {
+            //In Unity Editor, we expect our count to be above zero but it can not match, no need to log a warning
+#if !UNITY_EDITOR
+            Debug.LogWarning( "Main.cs LoadDataFromProcess() keys & values don't have a matching Count, usind defaults set in editor instead of data from process" );
+#endif
             CreateNeuroGuideManager();
             return;
         }
 
         for(int i = 0; i < keys.Count; ++i)
         {
+
             string key = keys[ i ];
             string value = values[ i ];
+
+            Debug.Log( key + " : " + value );
 
             if(key == "logs")
             {
@@ -173,7 +174,7 @@ public class Main : MonoBehaviour
 
         }
 
-        if(logs)
+        if(keys.Count != 0 && logs)
         {
             Debug.Log( "logs : " + logs );
             Debug.Log( "debug : " + debug );
@@ -184,7 +185,7 @@ public class Main : MonoBehaviour
         
 #endif
 
-    } //END LoadDataFromProcess Method
+        } //END LoadDataFromProcess Method
 
     #endregion
 
