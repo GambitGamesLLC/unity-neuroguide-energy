@@ -22,7 +22,7 @@ using UnityEngine;
 
 #endregion
 
-public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
+public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable, IThresholdInteractable
 {
 
     #region PUBLIC - VARIABLES
@@ -70,7 +70,7 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
     /// <summary>
     /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
     /// </summary>
-    public float threshold = 0.85f;
+    private float threshold = 0.85f;
 
     #endregion
 
@@ -179,6 +179,22 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable
         }
 
     } //END PlayAnimationDirectly
+
+
+    #endregion
+
+    #region PUBLIC - SET THRESHOLD
+
+    /// <summary>
+    /// Sets the threshold value used to change state
+    /// </summary>
+    //-----------------------------------------------------//
+    public void SetThreshold( float _threshold )
+    //-----------------------------------------------------//
+    {
+        threshold = _threshold;
+
+    } //END SetThreshold
 
     #endregion
 

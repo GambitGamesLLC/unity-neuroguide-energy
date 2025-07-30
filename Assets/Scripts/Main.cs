@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 #if EXT_DOTWEEN
 using DG.Tweening;
@@ -66,6 +67,11 @@ public class Main : MonoBehaviour
     /// UDP port to listen to for NeuroGuide communication
     /// </summary>
     public int port = 50000;
+
+    /// <summary>
+    /// The threshold for when we want the cube animation to change states between 'pieces' and 'hypercube'
+    /// </summary>
+    public float threshold = 0.9f;
 
     #endregion
 
@@ -174,6 +180,10 @@ public class Main : MonoBehaviour
             else if(key == "port")
             {
                 port = int.Parse( value );
+            }
+            else if(key == "threshold")
+            {
+                threshold = float.Parse( value );
             }
 
         }
@@ -285,6 +295,7 @@ public class Main : MonoBehaviour
             (NeuroGuideExperience.NeuroGuideExperienceSystem system)=>
             {
                 if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Successfully created NeuroGuideExperience" );
+                SetInteractableValues();
             },
 
             //OnFailed
@@ -301,6 +312,29 @@ public class Main : MonoBehaviour
 #endif
 
     } //END CreateNeuroGuideExperience Method
+
+    #endregion
+
+    #region PRIVATE - SET INTERACTABLE VALUES
+
+    /// <summary>
+    /// Sets the interactable values for this app
+    /// </summary>
+    //---------------------------------------------//
+    private void SetInteractableValues()
+    //---------------------------------------------//
+    {
+        //Look for any threshold values we want to set
+        List<IThresholdInteractable> interactablesUsingThresholds = FindObjectsByType<MonoBehaviour>( FindObjectsSortMode.None )
+                                                      .OfType<IThresholdInteractable>()
+                                                      .ToList();
+
+        foreach(IThresholdInteractable interactable in interactablesUsingThresholds )
+        {
+            interactable.SetThreshold( threshold );
+        }
+
+    } //END SetInteractableValues Method
 
     #endregion
 

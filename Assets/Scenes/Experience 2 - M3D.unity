@@ -713,6 +713,10 @@ PrefabInstance:
       value: 127.0.0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
+      propertyPath: threshold
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: configPath
       value: '%LOCALAPPDATA%\\M3DVR\\BuildingBlocks\\config.json'
       objectReference: {fileID: 0}
@@ -5967,7 +5971,6 @@ MonoBehaviour:
   transition_material: {fileID: 2100000, guid: 5dbd28afec978dc42b23fc9601de21f3, type: 2}
   transitionMin: 0
   transitionMax: 0.5
-  threshold: 0.99
 --- !u!1 &698653693
 GameObject:
   m_ObjectHideFlags: 0
@@ -7568,7 +7571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hypercube: {fileID: 1981093132}
-  threshold: 0.99
 --- !u!95 &1981093134
 Animator:
   serializedVersion: 7
