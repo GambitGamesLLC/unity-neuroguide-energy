@@ -30,7 +30,7 @@ public class HypercubeSpin : MonoBehaviour, INeuroGuideInteractable
     void Start()
     {
         // Convert the state name to a hash for performance
-        int stateHash = Animator.StringToHash( stateName );
+        stateHash = Animator.StringToHash( stateName );
 
         PlayAnimationDirectly( stateName );
         animator.speed = 0f;
