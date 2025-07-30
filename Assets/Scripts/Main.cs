@@ -22,11 +22,14 @@ using gambit.process;
 
 #if UNITY_INPUT
 using UnityEngine.InputSystem;
-using IngameDebugConsole;
 #endif
 
 #if EXT_TOTALJSON
 using Leguar.TotalJSON;
+#endif
+
+#if EXT_INGAMEDEBUGCONSOLE
+using IngameDebugConsole;
 #endif
 
 #endregion
@@ -192,12 +195,14 @@ public class Main : MonoBehaviour
     private void CreateVisualLog()
     //----------------------------------//
     {
+
+#if EXT_INGAMEDEBUGCONSOLE
 #if UNITY_EDITOR
         DebugLogManager.Instance.gameObject.SetActive( false );
 #else
         DebugLogManager.Instance.gameObject.SetActive( logs );
 #endif
-
+#endif
         CreateNeuroGuideManager();
 
     } //END CreateVisualLog Method
