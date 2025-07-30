@@ -24,24 +24,25 @@ When the user is not in a success state, the cube splits apart.
 
 ---  
 
-## INSTALL INSTRUCTIONS
+## PROCESS COMMAND LINE VALUE INSTRUCTIONS
 
-- Create the folder path `%LOCALAPPDATA%M3DVR/BuildingBlocks` on your PC.
-- For Example. `C:\Users\Derrick\AppData\Local\M3DVR\BuildingBlocks`
-- Copy the build artifact to this new folder so that the executable to run the app is at `%LOCALAPPDATA%/M3DVR/BuildingBlocks/BuildingBlocks.exe`
-- This should also line up with the paths preset in the config.json file in the Resources folder
+NeuroGuide experiences like `Building Blocks` can have their settings variables passed in by the NeuroGuide Launcher process.
 
----  
+- When this project is launched normally, without being started from the NeuroGuide launcher, it will use variables setup within the Unity editor.
+- These default variables are located on the `Main` component, present in the only scene used by this app.
+- The `ProcessManager` package will pass in variables that will replace these defaults, using the `ConfigManager` json system
+- These variables are passed into this project using command line arguments, but by using the `ProcessManager` we can easily send and recieve these values
+- The `NeuroGuide Launcher` application itself uses the `ConfigManager` to allow the variables to be set dynamically
 
 ## CONFIGURATION FILE INSTRUCTIONS
 
-NeuroGuide experiences like `Building Blocks` rely on a JSON configuration file to define their properties.  
+You can find the appropriate `configuration json` file within the Resources folder of the `NeuroGuide Launcher app`
 
-- A `config.json` file is stored in our Resources folder of the project, and can be updated to modify the application  
-- This `config.json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
-- If there already exists a `config.json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
+- A `configuration json` file is stored in our Resources folder of the project, and can be updated to modify the application  
+- This `configuration json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
+- If there already exists a `configuration json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
 
-- Locate and open the configuration json file within the resources folder, named `config.json`, which has contents similar to this
+- Locate and open the configuration json file within the resources folder, which has contents similar to this
 ```json
 {
   "config": {
