@@ -165,7 +165,7 @@ public class Main : MonoBehaviour
             }
             else if(key == "length")
             {
-                length = int.Parse( value );
+                length = float.Parse( value );
             }
             else if(key == "address")
             {
