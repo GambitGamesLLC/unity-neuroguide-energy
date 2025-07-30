@@ -7761,7 +7761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1981093134}
   threshold: 0.99
-  stateName: 
+  stateName: HypercubeAnim
 --- !u!1001 &3012628966636764136
 PrefabInstance:
   m_ObjectHideFlags: 0
