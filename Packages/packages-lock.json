@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "469ea45509501f78159107d93416fd7587d43b90"
+      "hash": "97cb905c4e90b585aec9d04e5f48c26c8211b0ad"
     },
     "com.gambit.mathhelper": {
       "version": "https://github.com/GambitGamesLLC/unity-math-helper.git?path=Assets/Plugins/Package",
@@ -27,6 +27,13 @@
       "source": "git",
       "dependencies": {},
       "hash": "7a66b0cf403fc29d119ed57672d80fb9b27bcba0"
+    },
+    "com.gambit.process": {
+      "version": "https://github.com/GambitGamesLLC/unity-process-manager.git?path=Assets/Plugins/Package",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "45cd1640a4e77b5d07970e271cf1f53bc69c5f4c"
     },
     "com.gambit.singleton": {
       "version": "https://github.com/GambitGamesLLC/unity-singleton.git?path=Assets/Plugins/Package",
