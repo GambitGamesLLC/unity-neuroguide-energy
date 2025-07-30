@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 #if EXT_DOTWEEN
 using DG.Tweening;
@@ -66,6 +67,21 @@ public class Main : MonoBehaviour
     /// UDP port to listen to for NeuroGuide communication
     /// </summary>
     public int port = 50000;
+
+    /// <summary>
+    /// The threshold for when we want the cube animation to change states between 'pieces' and 'hypercube'
+    /// </summary>
+    public float threshold = 0.9f;
+
+    /// <summary>
+    /// GameObject parents for a component using the IThresholdInterctable interface, used to set the threshold component which in turn determines the value used to change the state of the component
+    /// </summary>
+    public List<GameObject> thresholdInteractableGameObjects = new List<GameObject>();
+
+    /// <summary>
+    /// Interactables that need to have a threshold value passed into them to determine when they should change state
+    /// </summary>
+    public List<IThresholdInteractable> thresholdInteractables;
 
     #endregion
 
@@ -174,6 +190,10 @@ public class Main : MonoBehaviour
             else if(key == "port")
             {
                 port = int.Parse( value );
+            }
+            else if(key == "threshold")
+            {
+                threshold = float.Parse( value );
             }
 
         }
@@ -285,6 +305,7 @@ public class Main : MonoBehaviour
             (NeuroGuideExperience.NeuroGuideExperienceSystem system)=>
             {
                 if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Successfully created NeuroGuideExperience" );
+                SetThresholdValues();
             },
 
             //OnFailed
@@ -301,6 +322,39 @@ public class Main : MonoBehaviour
 #endif
 
     } //END CreateNeuroGuideExperience Method
+
+    #endregion
+
+    #region PRIVATE - SET THRESHOLD VALUES
+
+    /// <summary>
+    /// Sets the threshold interactable values for this app
+    /// </summary>
+    //---------------------------------------------//
+    private void SetThresholdValues()
+    //---------------------------------------------//
+    {
+        thresholdInteractables = new List<IThresholdInteractable>();
+
+        //Find all the threshold interactables and set their threshold value
+        if(thresholdInteractableGameObjects != null || thresholdInteractableGameObjects.Count > 0 )
+        {
+            foreach(GameObject go in thresholdInteractableGameObjects)
+            {
+                IThresholdInteractable thresholdInteractable = go.GetComponent<IThresholdInteractable>();
+                thresholdInteractables.Add( thresholdInteractable );
+            }
+
+            if(thresholdInteractables != null && thresholdInteractables.Count > 0)
+            {
+                foreach(IThresholdInteractable interactable in thresholdInteractables)
+                {
+                    interactable.SetThreshold( threshold );
+                }
+            }
+        }
+
+    } //END SetThresholdValues Method
 
     #endregion
 
