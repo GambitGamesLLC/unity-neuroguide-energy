@@ -22,6 +22,7 @@ using gambit.process;
 
 #if UNITY_INPUT
 using UnityEngine.InputSystem;
+using IngameDebugConsole;
 #endif
 
 #if EXT_TOTALJSON
@@ -121,14 +122,14 @@ public class Main : MonoBehaviour
         List<string> keys = ProcessManager.ReadArgumentKeys();
         List<string> values = ProcessManager.ReadArgumentValues();
 
-        Debug.Log( "keys.count = " + keys.Count + ", values.count = " + values.Count );
+        Debug.Log( "Main.cs LoadDataFromProcess() keys.count = " + keys.Count + ", values.count = " + values.Count );
 
         //If we have no command line key/values to read, skip this step
         if(keys == null || (keys != null && keys.Count == 0) ||
            values == null || (values != null && values.Count == 0) )
         {
             Debug.LogWarning( "Main.cs LoadDataFromProcess() either keys or values are null, usind defaults set in editor instead of data from process" );
-            CreateNeuroGuideManager();
+            CreateVisualLog();
             return;
         }
 
@@ -139,7 +140,7 @@ public class Main : MonoBehaviour
 #if !UNITY_EDITOR
             Debug.LogWarning( "Main.cs LoadDataFromProcess() keys & values don't have a matching Count, usind defaults set in editor instead of data from process" );
 #endif
-            CreateNeuroGuideManager();
+            CreateVisualLog();
             return;
         }
 
@@ -174,20 +175,34 @@ public class Main : MonoBehaviour
 
         }
 
-        if(keys.Count != 0 && logs)
-        {
-            Debug.Log( "logs : " + logs );
-            Debug.Log( "debug : " + debug );
-            Debug.Log( "length : " + length );
-            Debug.Log( "address : " + address );
-            Debug.Log( "port : " + port );
-        }
-        
+        CreateVisualLog();
+
 #endif
 
-        } //END LoadDataFromProcess Method
+    } //END LoadDataFromProcess Method
 
     #endregion
+
+    #region PRIVATE - CREATE VISUAL LOGGER
+
+    /// <summary>
+    /// Creates a visual debug log debug logs have been enabled and we are not in the Unity Editor
+    /// </summary>
+    //----------------------------------//
+    private void CreateVisualLog()
+    //----------------------------------//
+    {
+#if UNITY_EDITOR
+        DebugLogManager.Instance.gameObject.SetActive( false );
+#else
+        DebugLogManager.Instance.gameObject.SetActive( logs );
+#endif
+
+        CreateNeuroGuideManager();
+
+    } //END CreateVisualLog Method
+
+#endregion
 
     #region PRIVATE - CREATE NEUROGUIDE MANAGER
 
