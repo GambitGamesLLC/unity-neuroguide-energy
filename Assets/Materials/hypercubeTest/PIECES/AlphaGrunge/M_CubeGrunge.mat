@@ -48,7 +48,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2995
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
@@ -89,7 +89,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AlphaClipping: 2.2
+    - _AlphaClipping: 1.1787021
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
     - _AlphaLerp: 0
@@ -137,7 +137,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: 0
+    - _TransparentSortPriority: -5
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
