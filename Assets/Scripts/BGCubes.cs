@@ -1,3 +1,5 @@
+#region IMPORTS
+
 using UnityEngine;
 
 #if GAMBIT_NEUROGUIDE
@@ -7,6 +9,8 @@ using gambit.neuroguide;
 #if GAMBIT_MATHHELPER
 using gambit.mathhelper;
 #endif
+
+#endregion
 
 /// <summary>
 /// Controls the Global Volume URP object based on NeuroGuide hardware values
@@ -56,6 +60,21 @@ public class BGCubes: MonoBehaviour, INeuroGuideInteractable
 
     #endregion
 
+    #region PUBLIC - NEUROGUIDE - ON RECIEVING REWARD CHANGED
+
+    /// <summary>
+    /// Called when the NeuroGuide software starts or stops sending the user a reward
+    /// </summary>
+    /// <param name="isRecievingReward">Is the user currently recieiving a reward?</param>
+    //--------------------------------------------------------------------//
+    public void OnRecievingRewardChanged( bool isRecievingReward )
+    //--------------------------------------------------------------------//
+    {
+
+    } //END OnRecievingRewardChanged
+
+    #endregion
+
     #region PUBLIC - ON DATA UPDATE
 
     /// <summary>
@@ -81,7 +100,6 @@ public class BGCubes: MonoBehaviour, INeuroGuideInteractable
     } //END OnDataUpdate Method
 
     #endregion
-
 
     #region PUBLIC - PLAY ANIMATION TRIGGER
 

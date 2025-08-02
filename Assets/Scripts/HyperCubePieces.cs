@@ -104,6 +104,21 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable, IThreshold
 
     #endregion
 
+    #region PUBLIC - NEUROGUIDE - ON RECIEVING REWARD CHANGED
+
+    /// <summary>
+    /// Called when the NeuroGuide software starts or stops sending the user a reward
+    /// </summary>
+    /// <param name="isRecievingReward">Is the user currently recieiving a reward?</param>
+    //--------------------------------------------------------------------//
+    public void OnRecievingRewardChanged( bool isRecievingReward )
+    //--------------------------------------------------------------------//
+    {
+        
+    } //END OnRecievingRewardChanged
+
+    #endregion
+
     #region PUBLIC - NEUROGUIDE - ON DATA UPDATE
 
     /// <summary>

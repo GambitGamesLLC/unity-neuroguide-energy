@@ -1,7 +1,3 @@
-#if !GAMBIT_NEUROGUIDE
-    //Class is unused if gambit.neuroguide package is missing
-#else
-
 #region IMPORTS
 
 #if GAMBIT_NEUROGUIDE
@@ -34,7 +30,7 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
 
     #endregion
 
-    #region PUBLIC START
+    #region PUBLIC - START
 
     /// <summary>
     /// Unity lifecycle Start Method
@@ -49,6 +45,21 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
         //animator.speed = 0f;
 
     } //END Start
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON RECIEVING REWARD CHANGED
+
+    /// <summary>
+    /// Called when the NeuroGuide software starts or stops sending the user a reward
+    /// </summary>
+    /// <param name="isRecievingReward">Is the user currently recieiving a reward?</param>
+    //--------------------------------------------------------------------//
+    public void OnRecievingRewardChanged( bool isRecievingReward )
+    //--------------------------------------------------------------------//
+    {
+
+    } //END OnRecievingRewardChanged
 
     #endregion
 
@@ -76,6 +87,10 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
     } //END OnDataUpdate Method
 
     #endregion
+
+    #region PUBLIC - PLAY ANIMATION DIRECTLY
+
+    //-----------------------------------------------------------------//
     public void PlayAnimationDirectly(string stateName, int layer = 0, float normalizedTime = 0f)
     //-----------------------------------------------------------------//
     {
@@ -85,6 +100,8 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
         }
 
     } //END PlayAnimationDirectly
+
+    #endregion
 
     #region PUBLIC - SET THRESHOLD
 
@@ -102,5 +119,3 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
     #endregion
 
 } //END HyperCube Class
-
-#endif

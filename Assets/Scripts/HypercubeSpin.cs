@@ -18,13 +18,23 @@ using UnityEngine;
 /// </summary>
 public class HypercubeSpin : MonoBehaviour, INeuroGuideInteractable
 {
+    #region PUBLIC - VARIABLES
+
     public Animator animator;
 
     public float threshold = 0.99f;
 
     public string stateName;
 
+    #endregion
+
+    #region PRIVATE - VARIABLES
+
     private int stateHash = 0;
+
+    #endregion
+
+    #region PUBLIC - START
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,10 +46,33 @@ public class HypercubeSpin : MonoBehaviour, INeuroGuideInteractable
         animator.speed = 0f;
     }
 
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON RECIEVING REWARD CHANGED
+
+    /// <summary>
+    /// Called when the NeuroGuide software starts or stops sending the user a reward
+    /// </summary>
+    /// <param name="isRecievingReward">Is the user currently recieiving a reward?</param>
+    //--------------------------------------------------------------------//
+    public void OnRecievingRewardChanged( bool isRecievingReward )
+    //--------------------------------------------------------------------//
+    {
+
+    } //END OnRecievingRewardChanged
+
+    #endregion
+
+    #region PUBLIC - NUEROGUIDE - ON DATA UPDATE
+
     public void OnDataUpdate(float value)
     {
         PlayAnimationDirectly( stateName, 0, value);
     }
+
+    #endregion
+
+    #region PBLIC - PLAY ANIMATION DIRECTLY
 
     //-----------------------------------------------------------------//
     public void PlayAnimationDirectly(string stateName, int layer = 0, float normalizedTime = 0f)
@@ -51,4 +84,7 @@ public class HypercubeSpin : MonoBehaviour, INeuroGuideInteractable
         }
 
     } //END PlayAnimationDirectly
-}
+
+    #endregion
+
+} //END HypercubeSpin Class
