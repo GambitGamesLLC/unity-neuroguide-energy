@@ -15,18 +15,13 @@ using UnityEngine;
 /// <summary>
 /// Keeps the Hypercube visual component up to date with the NeuroGuide hardware data
 /// </summary>
-public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInteractable
+public class HyperCube : MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
 
     #region PUBLIC - VARIABLES
 
     public GameObject hypercube;
     public Animator animator;
-
-    /// <summary>
-    /// How far into the NeuroGuideExperience should we be before we cross the threshold? Uses a 0-1 normalized percentage value
-    /// </summary>
-    private float threshold = 0.85f;
 
     #endregion
 
@@ -73,18 +68,38 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
     public void OnDataUpdate( float value )
     //------------------------------------------------------------------------//
     {
-        //PlayAnimationDirectly("HypercubeAnim", 0, value);
-
-        if ( value >= threshold )
-        {
-            hypercube.SetActive( true );
-        }
-        else
-        {
-            hypercube.SetActive( false );
-        }
         
     } //END OnDataUpdate Method
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON ABOVE THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats above the threshold value
+    /// </summary>
+    //------------------------------------//
+    public void OnAboveThreshold()
+    //------------------------------------//
+    {
+        hypercube.SetActive( true );
+
+    } //END OnAboveThreshold
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON BELOW THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats below the threshold value
+    /// </summary>
+    //-------------------------------------//
+    public void OnBelowThreshold()
+    //-------------------------------------//
+    {
+        hypercube.SetActive( false );
+
+    } //END OnBelowThreshold
 
     #endregion
 
@@ -100,21 +115,6 @@ public class HyperCube : MonoBehaviour, INeuroGuideInteractable, IThresholdInter
         }
 
     } //END PlayAnimationDirectly
-
-    #endregion
-
-    #region PUBLIC - SET THRESHOLD
-
-    /// <summary>
-    /// Sets the threshold value used to change state
-    /// </summary>
-    //-----------------------------------------------------//
-    public void SetThreshold( float _threshold )
-    //-----------------------------------------------------//
-    {
-        threshold = _threshold;
-
-    } //END SetThreshold
 
     #endregion
 

@@ -22,7 +22,7 @@ using UnityEngine;
 
 #endregion
 
-public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable, IThresholdInteractable
+public class HyperCubePieces: MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
 
     #region PUBLIC - VARIABLES
@@ -133,16 +133,6 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable, IThreshold
         //Debug.Log( system.currentNormalizedAverageValue );
         PlayAnimationDirectly( "Joining", 0, value );
 
-        //If we reach our max value, hide the cube pieces and only show the hypercube
-        if( value >= threshold)
-        {
-            cube_pieces.SetActive( false );
-        }
-        else
-        {
-            cube_pieces.SetActive( true );
-        }
-
         //Animate our cube grunge texture
 #if GAMBIT_MATHHELPER
         if(grunge_material != null ) 
@@ -156,6 +146,36 @@ public class HyperCubePieces: MonoBehaviour, INeuroGuideInteractable, IThreshold
 #endif
 
     } //END OnDataUpdate Method
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON ABOVE THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats above the threshold value
+    /// </summary>
+    //------------------------------------//
+    public void OnAboveThreshold()
+    //------------------------------------//
+    {
+        cube_pieces.SetActive( false );
+
+    } //END OnAboveThreshold
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON BELOW THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats below the threshold value
+    /// </summary>
+    //-------------------------------------//
+    public void OnBelowThreshold()
+    //-------------------------------------//
+    {
+        cube_pieces.SetActive( true );
+
+    } //END OnBelowThreshold
 
     #endregion
 

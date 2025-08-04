@@ -73,16 +73,6 @@ public class Main : MonoBehaviour
     /// </summary>
     public float threshold = 0.9f;
 
-    /// <summary>
-    /// GameObject parents for a component using the IThresholdInterctable interface, used to set the threshold component which in turn determines the value used to change the state of the component
-    /// </summary>
-    public List<GameObject> thresholdInteractableGameObjects = new List<GameObject>();
-
-    /// <summary>
-    /// Interactables that need to have a threshold value passed into them to determine when they should change state
-    /// </summary>
-    public List<IThresholdInteractable> thresholdInteractables;
-
     #endregion
 
     #region PRIVATE - VARIABLES
@@ -292,69 +282,30 @@ public class Main : MonoBehaviour
 
 #if GAMBIT_NEUROGUIDE
 
-        NeuroGuideExperience.Create
+        NeuroGuideAnimationExperience.Create
         (
             //Options
-            new NeuroGuideExperience.Options()
+            new NeuroGuideAnimationExperience.Options()
             {
                 showDebugLogs = logs,
-                totalDurationInSeconds = length
+                totalDurationInSeconds = length,
+                threshold = threshold
             },
 
             //OnSuccess
-            (NeuroGuideExperience.NeuroGuideExperienceSystem system)=>
+            ( NeuroGuideAnimationExperience.NeuroGuideAnimationExperienceSystem system)=>
             {
-                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Successfully created NeuroGuideExperience" );
-                SetThresholdValues();
+                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideAnimationExperience() Successfully created NeuroGuideExperience" );
             },
 
             //OnFailed
-            LogError,
-
-            //OnDataUpdate
-            (float value)=>
-            {
-                if( logs ) Debug.Log( "Main.cs CreateNeuroGuideExperience() Data Updated = " + value );
-            }
+            LogError
 
         );
 
 #endif
 
     } //END CreateNeuroGuideExperience Method
-
-    #endregion
-
-    #region PRIVATE - SET THRESHOLD VALUES
-
-    /// <summary>
-    /// Sets the threshold interactable values for this app
-    /// </summary>
-    //---------------------------------------------//
-    private void SetThresholdValues()
-    //---------------------------------------------//
-    {
-        thresholdInteractables = new List<IThresholdInteractable>();
-
-        //Find all the threshold interactables and set their threshold value
-        if(thresholdInteractableGameObjects != null || thresholdInteractableGameObjects.Count > 0 )
-        {
-            foreach(GameObject go in thresholdInteractableGameObjects)
-            {
-                IThresholdInteractable thresholdInteractable = go.GetComponent<IThresholdInteractable>();
-                thresholdInteractables.Add( thresholdInteractable );
-            }
-
-            if(thresholdInteractables != null && thresholdInteractables.Count > 0)
-            {
-                foreach(IThresholdInteractable interactable in thresholdInteractables)
-                {
-                    interactable.SetThreshold( threshold );
-                }
-            }
-        }
-
-    } //END SetThresholdValues Method
 
     #endregion
 

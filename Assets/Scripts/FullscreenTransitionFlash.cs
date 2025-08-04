@@ -18,7 +18,7 @@ using gambit.mathhelper;
 /// <summary>
 /// Controls the transition flash material, which shows up when transition the cube to its complete state
 /// </summary>
-public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
+public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
     #region PUBLIC - VARIABLES
 
@@ -94,7 +94,7 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
 
     #endregion
 
-    #region PUBLIC - ON DATA UPDATE
+    #region PUBLIC - NEUROGUIDE - ON DATA UPDATE
 
     /// <summary>
     /// Updates the fullscreen transition flash based on our progress in the Neuroguide experience
@@ -134,6 +134,34 @@ public class FullscreenTransitionFlash: MonoBehaviour, INeuroGuideInteractable
         }
 
     } //END OnDataUpdate Method
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON ABOVE THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats above the threshold value
+    /// </summary>
+    //------------------------------------//
+    public void OnAboveThreshold()
+    //------------------------------------//
+    {
+
+    } //END OnAboveThreshold
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON BELOW THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats below the threshold value
+    /// </summary>
+    //-------------------------------------//
+    public void OnBelowThreshold()
+    //-------------------------------------//
+    {
+        
+    } //END OnBelowThreshold
 
     #endregion
 
