@@ -12,19 +12,14 @@ using gambit.neuroguide;
 
 
 
-public class ChangeAnimationWhenScoreFallsBelowThreshold : MonoBehaviour, INeuroGuideAnimationExperienceInteractable
+public class ChangeAnimationWhenScoreFallsBelowThreshold: MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
     #region PUBLIC - VARIABLES
 
     /// <summary>
-    /// The time in the animation to switch to, specific to an animation length
+    /// The time in the animation to switch to, normalized 0-1
     /// </summary>
-    public float changeToProgress = 5f;
-
-    /// <summary>
-    /// The max value to use when mapping the 'changeToProgress' value to the normalized 0-1 score
-    /// </summary>
-    public float mapMax = 10f;
+    public float changeToProgress = 0.5f;
 
     #endregion
 
@@ -32,7 +27,7 @@ public class ChangeAnimationWhenScoreFallsBelowThreshold : MonoBehaviour, INeuro
 
     public void OnAboveThreshold()
     {
-        
+
     }
 
     #endregion
@@ -49,10 +44,10 @@ public class ChangeAnimationWhenScoreFallsBelowThreshold : MonoBehaviour, INeuro
     {
         if(NeuroGuideAnimationExperience.system != null)
         {
-            float currentProgressInSeconds = MathHelper.Map( changeToProgress, 0f, mapMax, 0f, NeuroGuideAnimationExperience.system.options.totalDurationInSeconds );
+            float currentProgressInSeconds = MathHelper.Map( changeToProgress, 0f, 1f, 0f, NeuroGuideAnimationExperience.system.options.totalDurationInSeconds );
             NeuroGuideAnimationExperience.system.currentProgressInSeconds = currentProgressInSeconds;
         }
-        
+
     } //END OnBelowThreshold Method
 
     #endregion
@@ -70,7 +65,7 @@ public class ChangeAnimationWhenScoreFallsBelowThreshold : MonoBehaviour, INeuro
 
     public void OnRecievingRewardChanged( bool isRecievingReward )
     {
-        
+
     }
 
     #endregion
