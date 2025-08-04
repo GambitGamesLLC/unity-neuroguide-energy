@@ -15,7 +15,7 @@ using UnityEngine;
 /// <summary>
 /// Zooms the camara in and out based on NeuroGuide data updates
 /// </summary>
-public class CameraZoom : MonoBehaviour, INeuroGuideInteractable
+public class CameraZoom : MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
 
     #region PUBLIC - VARIABLES
@@ -66,6 +66,34 @@ public class CameraZoom : MonoBehaviour, INeuroGuideInteractable
             PlayAnimationDirectly("CameraAnim", 0, value);
         }
     }
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON ABOVE THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats above the threshold value
+    /// </summary>
+    //------------------------------------//
+    public void OnAboveThreshold()
+    //------------------------------------//
+    {
+
+    } //END OnAboveThreshold
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON BELOW THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats below the threshold value
+    /// </summary>
+    //-------------------------------------//
+    public void OnBelowThreshold()
+    //-------------------------------------//
+    {
+
+    } //END OnBelowThreshold
 
     #endregion
 

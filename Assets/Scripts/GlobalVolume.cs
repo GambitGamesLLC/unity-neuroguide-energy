@@ -17,7 +17,7 @@ using gambit.mathhelper;
 /// <summary>
 /// Controls the Global Volume URP object based on NeuroGuide hardware values
 /// </summary>
-public class GlobalVolume : MonoBehaviour, INeuroGuideInteractable
+public class GlobalVolume : MonoBehaviour, INeuroGuideAnimationExperienceInteractable
 {
     #region PUBLIC - VARIABLES
 
@@ -118,6 +118,34 @@ public class GlobalVolume : MonoBehaviour, INeuroGuideInteractable
 
     } //END OnDataUpdate Method
 
-#endregion
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON ABOVE THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats above the threshold value
+    /// </summary>
+    //------------------------------------//
+    public void OnAboveThreshold()
+    //------------------------------------//
+    {
+
+    } //END OnAboveThreshold
+
+    #endregion
+
+    #region PUBLIC - NEUROGUIDE - ON BELOW THRESHOLD
+
+    /// <summary>
+    /// Called when the NeuroGuideAnimationExperience has a score thats below the threshold value
+    /// </summary>
+    //-------------------------------------//
+    public void OnBelowThreshold()
+    //-------------------------------------//
+    {
+
+    } //END OnBelowThreshold
+
+    #endregion
 
 } //END GlobalVolume.cs Class
