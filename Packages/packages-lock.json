@@ -19,7 +19,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "871d15454b539bf84323ce65260018d76086c509"
+      "hash": "b6bbc08c6f2714d62f4d0fd1d9132234d8cd7531"
     },
     "com.gambit.neuroguide": {
       "version": "https://github.com/GambitGamesLLC/unity-neuroguide-manager.git?path=Assets/Plugins/Package",
