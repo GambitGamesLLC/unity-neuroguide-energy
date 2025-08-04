@@ -246,7 +246,7 @@ public class Main : MonoBehaviour
             ( NeuroGuideManager.NeuroGuideSystem system ) => 
             {
                 if( logs ) Debug.Log( "Main.cs CreateNeuroGuideManager() Successfully created NeuroGuideManager" );
-                CreateNeuroGuideExperience();
+                CreateNeuroGuideAnimationExperience();
             },
 
             //OnError
@@ -270,13 +270,13 @@ public class Main : MonoBehaviour
 
     #endregion
 
-    #region PRIVATE - CREATE NEUROGUIDE EXPERIENCE
+    #region PRIVATE - CREATE NEUROGUIDE ANIMATION EXPERIENCE
 
     /// <summary>
-    /// Initializes a NeuroGuideExperience once the hardware is ready
+    /// Initializes a NeuroGuideAnimationExperience once the hardware is ready
     /// </summary>
     //---------------------------------------------//
-    private void CreateNeuroGuideExperience()
+    private void CreateNeuroGuideAnimationExperience()
     //---------------------------------------------//
     {
 
