@@ -850,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: length
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8950026127989062179, guid: 49a40f74f7fb88848bafbf7740153564, type: 3}
       propertyPath: address
@@ -6947,14 +6947,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063481221}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.060397148, y: -0, z: -0, w: 0.9981744}
   m_LocalPosition: {x: 0, y: 47.4, z: -45.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1612925295}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.925, y: 0, z: 0}
 --- !u!4 &1067216379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 07ee687c6e399cb4eb7c3b5e0a44cca2, type: 3}
@@ -7583,7 +7583,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -7610,7 +7610,7 @@ Transform:
   m_GameObject: {fileID: 1928358899}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15133534, y: -0, z: -0, w: 0.98848253}
-  m_LocalPosition: {x: 0, y: 54.3, z: -70.9}
+  m_LocalPosition: {x: 0, y: 63.7, z: -100.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
