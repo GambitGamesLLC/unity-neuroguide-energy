@@ -7834,7 +7834,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1928358905}
-  threshold: 0.99
 --- !u!1 &1935228496
 GameObject:
   m_ObjectHideFlags: 0

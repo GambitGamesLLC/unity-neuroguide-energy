@@ -22,7 +22,7 @@ public class CameraZoom : MonoBehaviour, INeuroGuideAnimationExperienceInteracta
 
     public Animator animator;
 
-    public float threshold = 0.99f;
+    //public float threshold = 0.99f;
 
     #endregion
 
@@ -55,16 +55,8 @@ public class CameraZoom : MonoBehaviour, INeuroGuideAnimationExperienceInteracta
 
     public void OnDataUpdate(float value)
     {
-        PlayAnimationDirectly("CameraAnim", 0, value);
-
-        if (value >= threshold)
-        {
-            PlayAnimationDirectly("CameraZoomed", 0, value);
-        }
-        else
-        {
             PlayAnimationDirectly("CameraAnim", 0, value);
-        }
+       
     }
 
     #endregion
