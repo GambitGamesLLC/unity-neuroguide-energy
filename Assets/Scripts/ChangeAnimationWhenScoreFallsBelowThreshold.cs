@@ -19,7 +19,7 @@ public class ChangeAnimationWhenScoreFallsBelowThreshold: MonoBehaviour, INeuroG
     /// <summary>
     /// The time in the animation to switch to, normalized 0-1
     /// </summary>
-    public float changeToProgress = 0.5f;
+    public float changeToProgress = 0.33f;
 
     #endregion
 
@@ -56,6 +56,7 @@ public class ChangeAnimationWhenScoreFallsBelowThreshold: MonoBehaviour, INeuroG
 
     public void OnDataUpdate( float normalizedValue )
     {
+        //Debug.Log( normalizedValue );
         //Debug.Log( NeuroGuideAnimationExperience.system.currentProgressInSeconds );
     }
 

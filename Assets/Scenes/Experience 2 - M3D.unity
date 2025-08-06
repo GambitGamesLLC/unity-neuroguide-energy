@@ -7022,7 +7022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e2c6a91533dc8448b1dcf50a04ed7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeToProgress: 0.5
+  changeToProgress: 0.33
 --- !u!1 &1612925294
 GameObject:
   m_ObjectHideFlags: 0
