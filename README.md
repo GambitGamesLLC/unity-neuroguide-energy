@@ -13,7 +13,7 @@ When the user is not in a success state, the cube splits apart.
 
 ## PLAY INSTRUCTIONS
 
-- Open `Scenes/Experience 2 - M3D`
+- Open `Scenes/Main`
 - Press Play in the editor
 - Use your keyboard up and down keys to fake the UDP data being sent from the NeuroGuide software
 
