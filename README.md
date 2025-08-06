@@ -27,7 +27,7 @@ When the user is not in a success state, the cube splits apart.
 
 ## PROCESS COMMAND LINE VALUE INSTRUCTIONS
 
-NeuroGuide experiences like `Building Blocks` can have their settings variables passed in by the NeuroGuide Launcher process.
+NeuroGuide experiences like `Energy` can have their settings variables passed in by the NeuroGuide Launcher process.
 
 - When this project is launched normally, without being started from the NeuroGuide launcher, it will use variables setup within the Unity editor.
 - These default variables are located on the `Main` component, present in the only scene used by this app.
