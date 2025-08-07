@@ -1,13 +1,16 @@
 # unity-neuroguide-energy
-Unity3D project that utilizes the NeuroGuide hardware to show a visualizer experience.  
+Unity3D project that utilizes the NeuroGuide hardware to show a visualizer experience.
 
-In this experience, a series of block pieces form into a cube.  
+This application is intended to be launched as a Windows process from the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) project, and has variables sent into it via a .json configuration system. You'll find more information about this system in this guide and in the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) repository.
 
-As the user is in a 'success' state while using the NeuroGuide hardware, the cube forms.  
-When the user is not in a success state, the cube splits apart.  
+In this experience, a series of block pieces form into a cube, then start spinning from one cube face to the next horizontally. After 3 spins, the `threshold` is reached and the "Energy Cube" becomes visible.
 
-<img width="512" height="284" alt="image" src="https://github.com/user-attachments/assets/eeec3680-c4a0-4640-876e-23402dc550a5" />
+If the `progress` falls below the `threshold`, the `progress` value is forcibly set to a value, which means the user must rotate the cube face two more times to pass the `threshold` again.
 
+As the user is in a `reward` state while using the NeuroGuide hardware, the cube forms.  
+When the user is not in a `reward` state, the cube splits apart.  
+
+<img width="440" height="257" alt="image" src="https://github.com/user-attachments/assets/0474f872-9e09-47b0-9f5f-a514d33f81df" />
 
 ---
 
@@ -22,6 +25,86 @@ When the user is not in a success state, the cube splits apart.
 ## BUILD INSTRUCTIONS
 
 - No special build instructions, simply make a Windows desktop build
+- Your build location needs to be `%LocalAppData%\M3DVR\Energy`
+- This means your `.exe` would be at the path : `%LocalAppData%\M3DVR\Energy\Energy.exe`
+- This location follows the expected path that the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) will be looking for this projects build executable to launch as a new process.
+---  
+
+## ARTIST NOTES
+
+- The cubes are parented to the `ZeroRotationParent` gameObject that zeroes out the world translation and rotation.
+- The `SM_Hypercube` animation plays on awake. It plays at different speeds set in a list according to the experience length set in `NeuroGuide_Main`.
+- The `Pieces_rotator` game object spins the `SM_Pieces_Hypercube_Animated` gameObject. 
+
+---
+
+## NEUROGUIDE TERMINOLOGY
+
+- `focus` : The NeuroGuide software is looking for certain responses from the sub-concious of the user. This is referred to as the `focus`.
+- `reward` (boolean) : Is the user in the NeuroGuide hardware successfully in a state of `focus`?
+- `length` (float) : How long the experience should take to complete if the user in the NeuroGuide hardware was in a `reward` state consistently.
+- `score` (float) : How much time the user has spent in the `reward` state. Every time the hardware updates, we update this score by adding or subtracting the DeltaTime between updates to this value.
+- `progress` (float) : 0-1 normalized progress value. Calculated by mapping the `score` and `length` to a 0-1 range. EX: 0.5 is 50% through the experience.
+- `threshold` (float) : 0-1 normalized value. When the `progress` goes above or below this value, we send a Callback. This is used to enter and leave a reward state in this experience.
+
+---  
+
+## NEUROGUIDE SCORE, PROGRESS & LENGTH IN MORE DETAIL
+
+This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationExperience` script within the `NeuroGuideManager` package and changes the visuals accordingly.
+
+- When the user is focused in the NeuroGuide, this increases the score value
+- When the user loses focus, this decreases the score value
+- This app has a 'length' value, which the `NeuroGuideAnimationExperience` uses to determine how long the user must be focused to reach the end of the experience.
+- Using the `score` and `length` values, our system calculates a normalized 0-1 `progress` value, which is used to update our animations and trigger events
+- The `INeuroGuideAnimationExperienceInteractable` interface exposes the callbacks regarding the experience to our various scripts throughout the app.
+
+---  
+
+## NEUROGUIDE ANIMATION EXPERIENCE - THRESHOLD IN DETAIL
+
+- When the current progress goes above or below a normalized 0-1 `threshold` value, an event is called in our `INeuroGuideAnimationExperienceInteractable` interface.
+- In the `Energy` app, this threshold is reached after forming the cube and spinning the cube face three times, this is around 90% through the experience.
+- This threshold callback system is used to change the state of the experience (in this case, the energy cube enters its final glowing state)  
+
+- In the `Energy` app, we have a script in our Main scene, called `ChangeAnimationWhenScoreFallsBelowThreshold`. This script listens for when our progress falls below the threshold.
+- If the progress falls below the threshold, we then forcibly set the progress to a preset normalized 0-1 value, which puts the user at an earlier state of progress within the experience.
+- For the `Energy` experience, this forces the user to spin the cube face two more times before it passes the threshold again and enters the glowing energy state.
+
+---
+
+## NEUROGUIDE ANIMATION EXPERIENCE - INeuroGuideAnimationExperienceInteractable
+
+This interface exposes the functionality needed to make this experience.
+
+You'll find this interface added to many of the scripts used to control the experience, as its the primary point of exposure to the NeuroGuide systems for scripting.
+
+```
+/// <summary>
+/// Called when the user gets their score above the threshold value in the experience.
+/// When this happens, this callback will be prevented until the user falls back below the threshold
+/// and a set amount of time has passed, configurable in the NeuroGuideAnimationExperience Options object
+/// </summary>
+void OnAboveThreshold();
+
+/// <summary>
+/// Called when the user gets their score above the threshold value in the experience, then
+/// the score falls below the threshold
+/// </summary>
+void OnBelowThreshold();
+
+/// <summary>
+/// Called when the user starts or stops recieving a reward from the NeuroGuide hardware
+/// </summary>
+/// <param name="isRecievingReward">Is the user currently recieving a reward?</param>
+void OnRecievingRewardChanged( bool isRecievingReward );
+
+/// <summary>
+/// Called 60 times a second by the NeuroGuideAnimationExperience with the latest normalized value of how far the user is from reaching the end goal of the experience
+/// </summary>
+/// <param name="system">The current normalized value (0-1) of how far we are in the NeuroGuide animation experience</param>
+void OnDataUpdate( float normalizedValue );
+```
 
 ---  
 
@@ -35,14 +118,20 @@ NeuroGuide experiences like `Energy` can have their settings variables passed in
 - These variables are passed into this project using Windows process command line arguments, but by using the `ProcessManager` we can easily send and recieve these values
 - The `NeuroGuide Launcher` application itself uses the `ConfigManager` to allow the variables to be set dynamically
 
+---  
+
 ## CONFIGURATION FILE INSTRUCTIONS
 
-You can find the appropriate `configuration json` file within the Resources folder of the `NeuroGuide Launcher app`. 
+You can find the appropriate `configuration json` file within the Resources folder of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher). 
 This configuration file only exists as part of that repository and is not stored in this one.
 
-- A `configuration json` file is stored in our Resources folder of the project, and can be updated to modify the application  
+**If this app is run via the NeuroGuide launcher, it will use the data passed to it by the Launcher, which comes from a configuration .json file**
+
+- A `configuration json` file is stored in our Resources folder of the NeuroGuide Launcher project, and can be updated to modify the application  
 - This `configuration json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
 - If there already exists a `configuration json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
+- It is recommended to have the configuration file that's copied to your `%LOCALAPPDATA%` folder stay at a higher version number than the file inside of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) Unity Project, that way any changes to the configuration will be used when you restart this experience and the launcher to test the new values.
+- When you have found values you like, its recommended to make those the new defaults within the configuration files in the `Resources` folder of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) project. That way your next build will include them.
 
 - Locate and open the configuration json file within the resources folder, which has contents similar to this
 ```json
@@ -55,7 +144,7 @@ This configuration file only exists as part of that repository and is not stored
 	"app": {
 		"name": "Energy",
 		"path": "%LOCALAPPDATA%\\M3DVR\\Energy\\Energy.exe",
-		"length": 6,
+		"length": 3,
 		"debug": true,
 		"logs": false,
 		"threshold": 0.9
@@ -71,10 +160,10 @@ This configuration file only exists as part of that repository and is not stored
 <b>`app` OBJECT  </b>
 - `name` - Used by external software like the M3DVR Neuroguide launcher app to show the app name in a human readable format  
 - `path` - The path to the executable for this project. Like other stored Path variables, this will have any environment variables expanded and will be deserialized.  
-- `length` - How long should this experience last (in seconds) if the user was in a "success" state the entire time?
+- `length` - How long should this experience last (in seconds) if the user was in a "reward" state the entire time?
 - `debug` - Do we want to enable debug mode for this app? This will fake incoming UDP port traffice as if the NeuroGuide Software was sending us messages
-- `logs` - Do we want Unity console logs to be printed?  
-- `threshold` - Normalized 0-1 value representing how far into the experience you need to be before triggering the reward state of the app. EX: For 0.9, that would be 90% into the experience.
+- `logs` - Do we want Unity console logs to be shown in our visual console for debugging?  
+- `threshold` - Normalized 0-1 value representing how far into the experience you need to be before triggering the threshold state of the app. EX: For 0.9, that would be 90% into the experience.
 
 ---  
 
@@ -83,7 +172,7 @@ This configuration file only exists as part of that repository and is not stored
 Relies on several `Unity Asset Store` plugins as well as Open Source `Gambit Games` packages  
 
 Please make sure the proper `scripting define symbols` and packages are imported into your project.  
-This should happen automatically when opening this repo in Unity3D thanks to the package manager.  
+When opening this project for the first time, the package manager should grab the appropriate versions of these packages for you.
 
 Check the package repos directly for their `scripting define symbols`, `namespaces` and guides.  
 
