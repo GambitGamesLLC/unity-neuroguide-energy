@@ -8,7 +8,7 @@ If the `progress` falls below the `threshold`, the `progress` value is forcibly 
 As the user is in a `reward` state while using the NeuroGuide hardware, the cube forms.  
 When the user is not in a `reward` state, the cube splits apart.  
 
-<img width="440" height="257" alt="image" src="https://github.com/user-attachments/assets/1aca171e-ac85-449b-a751-42644ea5e266" />
+<img width="440" height="257" alt="image" src="https://github.com/user-attachments/assets/0474f872-9e09-47b0-9f5f-a514d33f81df" />
 
 ---
 
