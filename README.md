@@ -34,7 +34,7 @@ When the user is not in a `reward` state, the cube splits apart.
 
 ---
 
-## IMPORTANT CONCEPTS - NEUROGUIDE TERMINOLOGY
+## NEUROGUIDE TERMINOLOGY
 
 - `focus` : The NeuroGuide software is looking for certain responses from the sub-concious of the user. This is referred to as the `focus`.
 - `reward` (boolean) : Is the user in the NeuroGuide hardware successfully in a state of `focus`?
@@ -45,7 +45,7 @@ When the user is not in a `reward` state, the cube splits apart.
 
 ---  
 
-## IMPORTANT CONCEPTS - NEUROGUIDE SCORE & LENGTH
+## NEUROGUIDE SCORE, PROGRESS & LENGTH IN MORE DETAIL
 
 This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationExperience` script within the `NeuroGuideManager` package and changes the visuals accordingly.
 
@@ -57,7 +57,7 @@ This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationEx
 
 ---  
 
-## IMPORTANT CONCEPTS - NEUROGUIDE ANIMATION EXPERIENCE - THRESHOLD
+## NEUROGUIDE ANIMATION EXPERIENCE - THRESHOLD IN DETAIL
 
 - When the current progress goes above or below a normalized 0-1 `threshold` value, an event is called in our `INeuroGuideAnimationExperienceInteractable` interface.
 - In the `Energy` app, this threshold is reached after forming the cube and spinning the cube face three times, this is around 90% through the experience.
@@ -69,7 +69,7 @@ This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationEx
 
 ---
 
-## IMPORTANT CONCEPTS - INeuroGuideAnimationExperienceInteractable
+## NEUROGUIDE ANIMATION EXPERIENCE - INeuroGuideAnimationExperienceInteractable
 
 This interface exposes the functionality needed to make this experience.
 
@@ -77,7 +77,7 @@ This interface exposes the functionality needed to make this experience.
 /// <summary>
 /// Called when the user gets their score above the threshold value in the experience.
 /// When this happens, this callback will be prevented until the user falls back below the threshold
-/// and a set amount of time has passed, configurable in the NeuroGuideExperience Options object
+/// and a set amount of time has passed, configurable in the NeuroGuideAnimationExperience Options object
 /// </summary>
 void OnAboveThreshold();
 
@@ -94,9 +94,9 @@ void OnBelowThreshold();
 void OnRecievingRewardChanged( bool isRecievingReward );
 
 /// <summary>
-/// Called 60 times a second by the NeuroGuideExperience with the latest normalized value of how far the user is from reaching the end goal of the experience
+/// Called 60 times a second by the NeuroGuideAnimationExperience with the latest normalized value of how far the user is from reaching the end goal of the experience
 /// </summary>
-/// <param name="system">The current normalized value (0-1) of how far we are in the NeuroGuide experience</param>
+/// <param name="system">The current normalized value (0-1) of how far we are in the NeuroGuide animation experience</param>
 void OnDataUpdate( float normalizedValue );
 ```
 
