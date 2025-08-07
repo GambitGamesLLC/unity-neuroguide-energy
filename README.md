@@ -162,7 +162,7 @@ This configuration file only exists as part of that repository and is not stored
 Relies on several `Unity Asset Store` plugins as well as Open Source `Gambit Games` packages  
 
 Please make sure the proper `scripting define symbols` and packages are imported into your project.  
-This should happen automatically when opening this repo in Unity3D thanks to the package manager.  
+When opening this project for the first time, the package manager should grab the appropriate versions of these packages for you.
 
 Check the package repos directly for their `scripting define symbols`, `namespaces` and guides.  
 
