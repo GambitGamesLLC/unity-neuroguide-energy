@@ -119,7 +119,7 @@ This configuration file only exists as part of that repository and is not stored
 
 **If this app is run via the NeuroGuide launcher, it will use the data passed to it by the Launcher, which comes from a configuration .json file**
 
-- A `configuration json` file is stored in our Resources folder of the project, and can be updated to modify the application  
+- A `configuration json` file is stored in our Resources folder of the NeuroGuide Launcher project, and can be updated to modify the application  
 - This `configuration json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
 - If there already exists a `configuration json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
 
