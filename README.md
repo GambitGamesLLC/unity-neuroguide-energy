@@ -73,6 +73,8 @@ This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationEx
 
 This interface exposes the functionality needed to make this experience.
 
+You'll find this interface added to many of the scripts used to control the experience, as its the primary point of exposure to the NeuroGuide systems for scripting.
+
 ```
 /// <summary>
 /// Called when the user gets their score above the threshold value in the experience.
