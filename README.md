@@ -118,6 +118,8 @@ NeuroGuide experiences like `Energy` can have their settings variables passed in
 - These variables are passed into this project using Windows process command line arguments, but by using the `ProcessManager` we can easily send and recieve these values
 - The `NeuroGuide Launcher` application itself uses the `ConfigManager` to allow the variables to be set dynamically
 
+---  
+
 ## CONFIGURATION FILE INSTRUCTIONS
 
 You can find the appropriate `configuration json` file within the Resources folder of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher). 
