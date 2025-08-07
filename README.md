@@ -53,7 +53,7 @@ This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationEx
 - When the user loses focus, this decreases the score value
 - This app has a 'length' value, which the `NeuroGuideAnimationExperience` uses to determine how long the user must be focused to reach the end of the experience.
 - Using the `score` and `length` values, our system calculates a normalized 0-1 `progress` value, which is used to update our animations and trigger events
-- The `INeuroGuideAnimationExperienceInteractable` interface exposes the callbacks regarding the experience to our varous scripts throughout the app.
+- The `INeuroGuideAnimationExperienceInteractable` interface exposes the callbacks regarding the experience to our various scripts throughout the app.
 
 ---  
 
