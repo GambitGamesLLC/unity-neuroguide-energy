@@ -1,10 +1,12 @@
 # unity-neuroguide-energy
 Unity3D project that utilizes the NeuroGuide hardware to show a visualizer experience.  
 
-In this experience, a series of block pieces form into a cube.  
+In this experience, a series of block pieces form into a cube, then start spinning from one cube face to the next horizontally. After 3 spins, the `threshold` is reached and the "Energy Cube" becomes visible.
 
-As the user is in a 'success' state while using the NeuroGuide hardware, the cube forms.  
-When the user is not in a success state, the cube splits apart.  
+If the `progress` falls below the `threshold`, the `progress` value is forcibly set to a value, which means the user must rotate the cube face two more times to pass the `threshold` again.
+
+As the user is in a `reward` state while using the NeuroGuide hardware, the cube forms.  
+When the user is not in a `reward` state, the cube splits apart.  
 
 <img width="512" height="284" alt="image" src="https://github.com/user-attachments/assets/eeec3680-c4a0-4640-876e-23402dc550a5" />
 
@@ -24,6 +26,14 @@ When the user is not in a success state, the cube splits apart.
 - No special build instructions, simply make a Windows desktop build
 
 ---  
+
+## ARTIST NOTES
+
+- The cubes are parented to the `ZeroRotationParent` gameObject that zeroes out the world translation and rotation.
+- The `SM_Hypercube` animation plays on awake. It plays at different speeds set in a list according to the experience length set in `NeuroGuide_Main`.
+- The `Pieces_rotator` game object spins the `SM_Pieces_Hypercube_Animated` gameObject. 
+
+---
 
 ## IMPORTANT CONCEPTS - NEUROGUIDE TERMINOLOGY
 
