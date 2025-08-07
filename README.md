@@ -117,6 +117,8 @@ NeuroGuide experiences like `Energy` can have their settings variables passed in
 You can find the appropriate `configuration json` file within the Resources folder of the `NeuroGuide Launcher app`. 
 This configuration file only exists as part of that repository and is not stored in this one.
 
+**If this app is run via the NeuroGuide launcher, it will use the data passed to it by the Launcher, which comes from a configuration .json file**
+
 - A `configuration json` file is stored in our Resources folder of the project, and can be updated to modify the application  
 - This `configuration json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
 - If there already exists a `configuration json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
@@ -132,7 +134,7 @@ This configuration file only exists as part of that repository and is not stored
 	"app": {
 		"name": "Energy",
 		"path": "%LOCALAPPDATA%\\M3DVR\\Energy\\Energy.exe",
-		"length": 6,
+		"length": 3,
 		"debug": true,
 		"logs": false,
 		"threshold": 0.9
@@ -148,10 +150,10 @@ This configuration file only exists as part of that repository and is not stored
 <b>`app` OBJECT  </b>
 - `name` - Used by external software like the M3DVR Neuroguide launcher app to show the app name in a human readable format  
 - `path` - The path to the executable for this project. Like other stored Path variables, this will have any environment variables expanded and will be deserialized.  
-- `length` - How long should this experience last (in seconds) if the user was in a "success" state the entire time?
+- `length` - How long should this experience last (in seconds) if the user was in a "reward" state the entire time?
 - `debug` - Do we want to enable debug mode for this app? This will fake incoming UDP port traffice as if the NeuroGuide Software was sending us messages
 - `logs` - Do we want Unity console logs to be shown in our visual console for debugging?  
-- `threshold` - Normalized 0-1 value representing how far into the experience you need to be before triggering the reward state of the app. EX: For 0.9, that would be 90% into the experience.
+- `threshold` - Normalized 0-1 value representing how far into the experience you need to be before triggering the threshold state of the app. EX: For 0.9, that would be 90% into the experience.
 
 ---  
 
