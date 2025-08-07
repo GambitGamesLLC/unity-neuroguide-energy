@@ -1,5 +1,7 @@
 # unity-neuroguide-energy
-Unity3D project that utilizes the NeuroGuide hardware to show a visualizer experience.  
+Unity3D project that utilizes the NeuroGuide hardware to show a visualizer experience.
+
+This application is intended to be launched as a Windows process from the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) project, and has variables sent into it via a .json configuration system. You'll find more information about this system in this guide and in the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) repository.
 
 In this experience, a series of block pieces form into a cube, then start spinning from one cube face to the next horizontally. After 3 spins, the `threshold` is reached and the "Energy Cube" becomes visible.
 
@@ -116,7 +118,7 @@ NeuroGuide experiences like `Energy` can have their settings variables passed in
 
 ## CONFIGURATION FILE INSTRUCTIONS
 
-You can find the appropriate `configuration json` file within the Resources folder of the `NeuroGuide Launcher app`. 
+You can find the appropriate `configuration json` file within the Resources folder of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher). 
 This configuration file only exists as part of that repository and is not stored in this one.
 
 **If this app is run via the NeuroGuide launcher, it will use the data passed to it by the Launcher, which comes from a configuration .json file**
@@ -124,8 +126,8 @@ This configuration file only exists as part of that repository and is not stored
 - A `configuration json` file is stored in our Resources folder of the NeuroGuide Launcher project, and can be updated to modify the application  
 - This `configuration json` file is copied to our `%LOCALAPPDATA%` folder, specifically in the path specified in the `config:path` object  
 - If there already exists a `configuration json` at the specified path, we will compare it against the one in the Resources folder. If the local file is out of date or missing, it will be written using the version in Resources.
-- It is recommended to have the configuration file that's copied to your `%LOCALAPPDATA%` folder stay at a higher version number than the file inside of the `NeuroGuideLauncher` Unity Project, that way any changes to the configuration will be used when you restart this experience and the launcher to test the new values.
-- When you have found values you like, its recommended to make those the new defaults within the configuration files in the `Resources` folder of the `NeuroGuideLauncher` project. That way your next build will include them.
+- It is recommended to have the configuration file that's copied to your `%LOCALAPPDATA%` folder stay at a higher version number than the file inside of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) Unity Project, that way any changes to the configuration will be used when you restart this experience and the launcher to test the new values.
+- When you have found values you like, its recommended to make those the new defaults within the configuration files in the `Resources` folder of the [unity-neuroguide-launcher](https://github.com/GambitGamesLLC/unity-neuroguide-launcher) project. That way your next build will include them.
 
 - Locate and open the configuration json file within the resources folder, which has contents similar to this
 ```json
