@@ -25,6 +25,74 @@ When the user is not in a success state, the cube splits apart.
 
 ---  
 
+## IMPORTANT CONCEPTS - NEUROGUIDE TERMINOLOGY
+
+- `focus` : The NeuroGuide software is looking for certain responses from the sub-concious of the user. This is referred to as the `focus`.
+- `reward` (boolean) : Is the user in the NeuroGuide hardware successfully in a state of `focus`?
+- `length` (float) : How long the experience should take to complete if the user in the NeuroGuide hardware was in a `reward` state consistently.
+- `score` (float) : How much time the user has spent in the `reward` state. Every time the hardware updates, we update this score by adding or subtracting the DeltaTime between updates to this value.
+- `progress` (float) : 0-1 normalized progress value. Calculated by mapping the `score` and `length` to a 0-1 range. EX: 0.5 is 50% through the experience.
+- `threshold` (float) : 0-1 normalized value. When the `progress` goes above or below this value, we send a Callback. This is used to enter and leave a reward state in this experience.
+
+---  
+
+## IMPORTANT CONCEPTS - NEUROGUIDE SCORE & LENGTH
+
+This NeuroGuide `Energy` app listens for updates from the `NeuroGuideAnimationExperience` script within the `NeuroGuideManager` package and changes the visuals accordingly.
+
+- When the user is focused in the NeuroGuide, this increases the score value
+- When the user loses focus, this decreases the score value
+- This app has a 'length' value, which the `NeuroGuideAnimationExperience` uses to determine how long the user must be focused to reach the end of the experience.
+- Using the `score` and `length` values, our system calculates a normalized 0-1 `progress` value, which is used to update our animations and trigger events
+- The `INeuroGuideAnimationExperienceInteractable` interface exposes the callbacks regarding the experience to our varous scripts throughout the app.
+
+---  
+
+## IMPORTANT CONCEPTS - NEUROGUIDE ANIMATION EXPERIENCE - THRESHOLD
+
+- When the current progress goes above or below a normalized 0-1 `threshold` value, an event is called in our `INeuroGuideAnimationExperienceInteractable` interface.
+- In the `Energy` app, this threshold is reached after forming the cube and spinning the cube face three times, this is around 90% through the experience.
+- This threshold callback system is used to change the state of the experience (in this case, the energy cube enters its final glowing state)  
+
+- In the `Energy` app, we have a script in our Main scene, called `ChangeAnimationWhenScoreFallsBelowThreshold`. This script listens for when our progress falls below the threshold.
+- If the progress falls below the threshold, we then forcibly set the progress to a preset normalized 0-1 value, which puts the user at an earlier state of progress within the experience.
+- For the `Energy` experience, this forces the user to spin the cube face two more times before it passes the threshold again and enters the glowing energy state.
+
+---
+
+## IMPORTANT CONCEPTS - INeuroGuideAnimationExperienceInteractable
+
+This interface exposes the functionality needed to make this experience.
+
+```
+/// <summary>
+/// Called when the user gets their score above the threshold value in the experience.
+/// When this happens, this callback will be prevented until the user falls back below the threshold
+/// and a set amount of time has passed, configurable in the NeuroGuideExperience Options object
+/// </summary>
+void OnAboveThreshold();
+
+/// <summary>
+/// Called when the user gets their score above the threshold value in the experience, then
+/// the score falls below the threshold
+/// </summary>
+void OnBelowThreshold();
+
+/// <summary>
+/// Called when the user starts or stops recieving a reward from the NeuroGuide hardware
+/// </summary>
+/// <param name="isRecievingReward">Is the user currently recieving a reward?</param>
+void OnRecievingRewardChanged( bool isRecievingReward );
+
+/// <summary>
+/// Called 60 times a second by the NeuroGuideExperience with the latest normalized value of how far the user is from reaching the end goal of the experience
+/// </summary>
+/// <param name="system">The current normalized value (0-1) of how far we are in the NeuroGuide experience</param>
+void OnDataUpdate( float normalizedValue );
+```
+
+---  
+
 ## PROCESS COMMAND LINE VALUE INSTRUCTIONS
 
 NeuroGuide experiences like `Energy` can have their settings variables passed in by the NeuroGuide Launcher process.
@@ -73,7 +141,7 @@ This configuration file only exists as part of that repository and is not stored
 - `path` - The path to the executable for this project. Like other stored Path variables, this will have any environment variables expanded and will be deserialized.  
 - `length` - How long should this experience last (in seconds) if the user was in a "success" state the entire time?
 - `debug` - Do we want to enable debug mode for this app? This will fake incoming UDP port traffice as if the NeuroGuide Software was sending us messages
-- `logs` - Do we want Unity console logs to be printed?  
+- `logs` - Do we want Unity console logs to be shown in our visual console for debugging?  
 - `threshold` - Normalized 0-1 value representing how far into the experience you need to be before triggering the reward state of the app. EX: For 0.9, that would be 90% into the experience.
 
 ---  
